@@ -14,7 +14,7 @@ We want to display Marvel superheroes on a table, and get some key values from t
 
 * [x] Read Marvel data provided and display it on a [table](https://material.angular.io/components/table/overview)
 * This table has the following features:
-    * [ ] I want to be able to sort values by each column
+    * [x] I want to be able to sort values by each column
     * [ ] Using the [chips component](https://material.angular.io/components/chips/examples), I want to type one or more hero names, and display on the table only those heroes
     * [ ] When I click on a row, I want to display the whole heroe info on a modal
 * [ ] Add a button on the page that says, “create hero”.
