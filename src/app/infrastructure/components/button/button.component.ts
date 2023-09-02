@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
 	selector: 'challenger-button',
 	standalone: true,
-	imports: [CommonModule, MatButtonModule],
+	imports: [MatButtonModule],
 	templateUrl: './button.component.html',
 	styles: []
 })
