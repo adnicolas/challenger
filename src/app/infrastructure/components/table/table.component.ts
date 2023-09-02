@@ -29,11 +29,6 @@ export class TableComponent implements OnInit {
 	ngOnInit() {
 		this.getTableData();
 	}
-	private async getTableData(): Promise<void> {
-		const data: MarvelData[] = await this.marvelService.getData();
-		this.displayedColumnsSrc.next(Object.keys(data[0]));
-		this.dataSrc.next(new MatTableDataSource(data));
-	}
 	public getHeader(property: string): string {
 		if (property.includes('Label')) {
 			return `${property[0].toUpperCase()}${property.slice(
@@ -41,5 +36,10 @@ export class TableComponent implements OnInit {
 			)}`.replace('Label', '');
 		}
 		return property;
+	}
+	private async getTableData(): Promise<void> {
+		const data: MarvelData[] = await this.marvelService.getData();
+		this.displayedColumnsSrc.next(Object.keys(data[0]));
+		this.dataSrc.next(new MatTableDataSource(data));
 	}
 }

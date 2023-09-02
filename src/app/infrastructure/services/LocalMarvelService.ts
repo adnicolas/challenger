@@ -4,7 +4,7 @@ import { MarvelService } from '@domain/MarvelService';
 
 @Injectable()
 export class LocalMarvelService implements MarvelService {
-	getData(): Promise<MarvelData[]> {
+	public async getData(): Promise<MarvelData[]> {
 		return fetch('assets/data/wikipedia_marvel_data.json')
 			.then((res) => res.json())
 			.then((data) => data);
