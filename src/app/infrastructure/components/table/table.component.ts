@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MarvelData } from '@domain/MarvelData.interface';
+import { MarvelHero } from '@domain/MarvelHero.interface';
 import { DataService } from '@domain/DataService';
 import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { GetData } from '@application/GetData';
@@ -31,11 +31,11 @@ const headerCapitalizeSlice = 1;
 })
 export class TableComponent implements AfterViewInit {
 	private stateService = inject(SubjectStateService);
-	public data$: Observable<MarvelData[]> = this.stateService.data$;
+	public heroes$: Observable<MarvelHero[]> = this.stateService.data$;
 	public displayedColumns: string[] = [];
 
 	constructor(private dataService: DataService) {
-		this.data$.subscribe((data: MarvelData[]) => {
+		this.heroes$.subscribe((data: MarvelHero[]) => {
 			if (data?.length) {
 				this.displayedColumns = Object.keys(data[0]);
 			}
@@ -54,4 +54,6 @@ export class TableComponent implements AfterViewInit {
 		}
 		return property;
 	}
+
+	public sortData(): void {}
 }

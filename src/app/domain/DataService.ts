@@ -1,5 +1,5 @@
-import { MarvelData } from './MarvelData.interface';
+import { MarvelHero } from './MarvelHero.interface';
 
 export abstract class DataService {
-	public abstract getData(): Promise<MarvelData[]>;
+	public abstract getData(): Promise<MarvelHero[]>;
 }

@@ -1,5 +1,5 @@
 import { DataService } from '@domain/DataService';
-import { MarvelData } from '@domain/MarvelData.interface';
+import { MarvelHero } from '@domain/MarvelHero.interface';
 import { StateService } from '@domain/StateService.interface';
 
 export class GetData {
@@ -8,7 +8,7 @@ export class GetData {
 		private readonly stateService: StateService,
 	) {}
 	public async run(): Promise<void> {
-		const data: MarvelData[] = await this.dataService.getData();
+		const data: MarvelHero[] = await this.dataService.getData();
 		this.stateService.setData(data);
 	}
 }

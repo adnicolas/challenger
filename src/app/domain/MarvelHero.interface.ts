@@ -1,6 +1,6 @@
 import { Gender } from '@domain/Gender.enum';
 
-export interface MarvelData {
+export interface MarvelHero {
 	nameLabel: string;
 	genderLabel: Gender;
 	citizenshipLabel: string;
