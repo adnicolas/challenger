@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	effect,
+	inject
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MarvelData } from '@domain/MarvelData.interface';
-import { MarvelService } from '@domain/MarvelService';
-import { LocalMarvelService } from '@infrastructure/services/LocalMarvelService';
+import { DataService } from '@domain/DataService';
+import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { BehaviorSubject } from 'rxjs';
+import { GetMarvelData } from '@application/GetMarvelData';
+import { SignalStateService } from '@infrastructure/services/SignalStateService';
 
 const headerCapitalizeSlice = 1;
 
@@ -14,7 +22,7 @@ const headerCapitalizeSlice = 1;
 	imports: [CommonModule, MatTableModule],
 	templateUrl: './table.component.html',
 	styles: [],
-	providers: [{ provide: MarvelService, useClass: LocalMarvelService }],
+	providers: [{ provide: DataService, useClass: LocalDataService }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
@@ -24,11 +32,22 @@ export class TableComponent implements OnInit {
 	private displayedColumnsSrc = new BehaviorSubject<string[]>([]);
 	public displayedColumns$ = this.displayedColumnsSrc.asObservable();
 
-	constructor(private marvelService: MarvelService) {}
+	private stateService = inject(SignalStateService);
+
+	constructor(private dataService: DataService) {
+		effect(() => {
+			const data: MarvelData[] = this.stateService.data$();
+			if (data?.length) {
+				this.displayedColumnsSrc.next(Object.keys(data[0]));
+				this.dataSrc.next(new MatTableDataSource(data));
+			}
+		});
+	}
 
 	ngOnInit() {
-		this.getTableData();
+		new GetMarvelData(this.dataService, this.stateService).run();
 	}
+
 	public getHeader(property: string): string {
 		if (property.includes('Label')) {
 			return `${property[0].toUpperCase()}${property.slice(
@@ -36,10 +55,5 @@ export class TableComponent implements OnInit {
 			)}`.replace('Label', '');
 		}
 		return property;
-	}
-	private async getTableData(): Promise<void> {
-		const data: MarvelData[] = await this.marvelService.getData();
-		this.displayedColumnsSrc.next(Object.keys(data[0]));
-		this.dataSrc.next(new MatTableDataSource(data));
 	}
 }
