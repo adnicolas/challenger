@@ -9,17 +9,17 @@ import { MarvelHero } from '@domain/MarvelHero.interface';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-	selector: 'challenger-dialog',
+	selector: 'challenger-detail-dialog',
 	standalone: true,
 	imports: [
 		CommonModule,
 		MatDialogModule,
 		ButtonComponent
 	],
-	templateUrl: './dialog.component.html',
+	templateUrl: './detail-dialog.component.html',
 	styles: []
 })
-export class DialogComponent {
+export class DetailDialogComponent {
 	constructor(
 		public dialogRef: MatDialogRef<unknown>,
 		@Inject(MAT_DIALOG_DATA) public data: MarvelHero,
