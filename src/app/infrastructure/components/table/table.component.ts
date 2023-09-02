@@ -35,9 +35,9 @@ export class TableComponent implements AfterViewInit {
 	public displayedColumns: string[] = [];
 
 	constructor(private dataService: DataService) {
-		this.heroes$.subscribe((data: MarvelHero[]) => {
-			if (data?.length) {
-				this.displayedColumns = Object.keys(data[0]);
+		this.heroes$.subscribe((heroes: MarvelHero[]) => {
+			if (heroes?.length) {
+				this.displayedColumns = Object.keys(heroes[0]);
 			}
 		});
 	}
