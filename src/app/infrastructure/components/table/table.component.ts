@@ -11,7 +11,7 @@ import { MarvelData } from '@domain/MarvelData.interface';
 import { DataService } from '@domain/DataService';
 import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { BehaviorSubject } from 'rxjs';
-import { GetMarvelData } from '@application/GetMarvelData';
+import { GetData } from '@application/GetData';
 import { SignalStateService } from '@infrastructure/services/SignalStateService';
 
 const headerCapitalizeSlice = 1;
@@ -44,8 +44,8 @@ export class TableComponent implements OnInit {
 		});
 	}
 
-	ngOnInit() {
-		new GetMarvelData(this.dataService, this.stateService).run();
+	async ngOnInit() {
+		await new GetData(this.dataService, this.stateService).run();
 	}
 
 	public getHeader(property: string): string {
