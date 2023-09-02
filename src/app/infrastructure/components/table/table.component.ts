@@ -1,15 +1,7 @@
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	Component,
-	inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MarvelHero } from '@domain/MarvelHero.interface';
-import { DataService } from '@domain/DataService';
-import { LocalDataService } from '@infrastructure/services/LocalDataService';
-import { GetData } from '@application/GetData';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
@@ -27,26 +19,21 @@ const headerCapitalizeSlice = 1;
 	],
 	templateUrl: './table.component.html',
 	styles: [],
-	providers: [{ provide: DataService, useClass: LocalDataService }],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent {
 	private stateService = inject(SubjectStateService);
 	public heroes$: Observable<MarvelHero[]> = this.stateService.data$;
 	public displayedColumns: string[] = [];
 	private heroes: MarvelHero[] = [];
 
-	constructor(private dataService: DataService) {
+	constructor() {
 		this.heroes$.subscribe((heroes: MarvelHero[]) => {
 			this.heroes = heroes;
 			if (heroes?.length) {
 				this.displayedColumns = Object.keys(heroes[0]);
 			}
 		});
-	}
-
-	async ngAfterViewInit() {
-		await new GetData(this.dataService, this.stateService).run();
 	}
 
 	public getHeader(property: string): string {

@@ -7,10 +7,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class SubjectStateService implements StateService {
-	private dataSrc = new BehaviorSubject<MarvelHero[]>([]);
-	public data$: Observable<MarvelHero[]> = this.dataSrc.asObservable();
+	private heroesSrc = new BehaviorSubject<MarvelHero[]>([]);
+	public data$: Observable<MarvelHero[]> = this.heroesSrc.asObservable();
+
+	private heroesNamesSrc = new BehaviorSubject<string[]>([]);
+	public heroesNames$: Observable<string[]> =
+		this.heroesNamesSrc.asObservable();
 
 	public setData(data: MarvelHero[]): void {
-		this.dataSrc.next(data);
+		this.heroesSrc.next(data);
+		this.heroesNamesSrc.next(data.map((hero: MarvelHero) => hero.nameLabel));
 	}
 }
