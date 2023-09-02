@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ButtonComponent {
 	@Input() text!: string;
+	@Input() disabled: boolean = false;
 	@Output() private clicked: EventEmitter<void> = new EventEmitter();
 	public onClick() {
 		this.clicked.emit();

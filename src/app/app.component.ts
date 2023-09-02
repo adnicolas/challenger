@@ -12,6 +12,10 @@ import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@infrastructure/components/button/button.component';
+import { OpenHeroCreation } from '@application/OpenHeroCreation';
+import { HeroCreationDialogService } from '@domain/HeroCreationDialogService';
+// eslint-disable-next-line max-len
+import { AngularMaterialHeroCreationDialogService } from '@infrastructure/services/AngularMaterialHeroCreationDialogService';
 
 @Component({
 	selector: 'challenger-root',
@@ -23,17 +27,26 @@ import { ButtonComponent } from '@infrastructure/components/button/button.compon
 		MatDialogModule
 	],
 	templateUrl: './app.component.html',
-	providers: [{ provide: DataService, useClass: LocalDataService }],
+	providers: [
+		{ provide: DataService, useClass: LocalDataService },
+		{
+			provide: HeroCreationDialogService,
+			useClass: AngularMaterialHeroCreationDialogService
+		}
+	],
 	styles: [],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
 	private stateService = inject(SubjectStateService);
-	constructor(private dataService: DataService) {}
+	constructor(
+		private dataService: DataService,
+		private heroCreationDialogService: HeroCreationDialogService,
+	) {}
 	async ngOnInit(): Promise<void> {
 		await new GetHeroes(this.dataService, this.stateService).run();
 	}
 	public onCreateHero(): void {
-		//console.log('on create hero clicked');
+		new OpenHeroCreation(this.heroCreationDialogService).run();
 	}
 }
