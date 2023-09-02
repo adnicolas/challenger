@@ -4,6 +4,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MarvelData } from '../../../domain/MarvelData.interface';
 import { MarvelService } from '../../../domain/MarvelService';
 import { LocalMarvelService } from '../../services/LocalMarvelService';
+import { BehaviorSubject } from 'rxjs';
 
 const headerCapitalizeSlice = 1;
 
@@ -17,13 +18,21 @@ const headerCapitalizeSlice = 1;
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
-	public dataSource = new MatTableDataSource<MarvelData>();
-	public displayedColumns: string[] = [];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	private dataSrc = new BehaviorSubject<any>([]);
+	public dataSource$ = this.dataSrc.asObservable();
+	private displayedColumnsSrc = new BehaviorSubject<string[]>([]);
+	public displayedColumns$ = this.displayedColumnsSrc.asObservable();
+
 	constructor(private marvelService: MarvelService) {}
+
 	ngOnInit() {
-		const data: MarvelData[] = this.marvelService.getData();
-		this.displayedColumns = Object.keys(data[0]);
-		this.dataSource = new MatTableDataSource(data);
+		this.getTableData();
+	}
+	private async getTableData(): Promise<void> {
+		const data: MarvelData[] = await this.marvelService.getData();
+		this.displayedColumnsSrc.next(Object.keys(data[0]));
+		this.dataSrc.next(new MatTableDataSource(data));
 	}
 	public getHeader(property: string): string {
 		if (property.includes('Label')) {
