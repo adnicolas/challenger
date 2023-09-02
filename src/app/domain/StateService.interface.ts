@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs';
+
 export interface StateService {
-	data$: unknown;
+	data$: Observable<unknown>;
 	setData(data: unknown): void;
 }
