@@ -5,8 +5,8 @@ import {
 	MatDialogRef,
 	MatDialogModule
 } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { MarvelHero } from '@domain/MarvelHero.interface';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
 	selector: 'challenger-dialog',
@@ -14,7 +14,7 @@ import { MarvelHero } from '@domain/MarvelHero.interface';
 	imports: [
 		CommonModule,
 		MatDialogModule,
-		MatButtonModule
+		ButtonComponent
 	],
 	templateUrl: './dialog.component.html',
 	styles: []

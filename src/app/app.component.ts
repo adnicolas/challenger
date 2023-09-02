@@ -11,6 +11,7 @@ import { TableComponent } from '@infrastructure/components/table/table.component
 import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ButtonComponent } from '@infrastructure/components/button/button.component';
 
 @Component({
 	selector: 'challenger-root',
@@ -18,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 	imports: [
 		TableComponent,
 		ChipsComponent,
+		ButtonComponent,
 		MatDialogModule
 	],
 	templateUrl: './app.component.html',
@@ -30,5 +32,8 @@ export class AppComponent implements OnInit {
 	constructor(private dataService: DataService) {}
 	async ngOnInit(): Promise<void> {
 		await new GetHeroes(this.dataService, this.stateService).run();
+	}
+	public onCreateHero(): void {
+		//console.log('on create hero clicked');
 	}
 }

@@ -9,7 +9,6 @@ import { SortHeroes } from '@application/SortHeroes';
 import { OpenHeroDetail } from '@application/OpenHeroDetail';
 // eslint-disable-next-line max-len
 import { AngularMaterialHeroDetailDialogService } from '@infrastructure/services/AngularMaterialHeroDetailDialogService';
-import { StateService } from '@domain/StateService';
 import { HeroDetailDialogService } from '@domain/HeroDetailDialogService';
 
 const headerCapitalizeSlice = 1;
@@ -24,7 +23,6 @@ const headerCapitalizeSlice = 1;
 	],
 	templateUrl: './table.component.html',
 	providers: [
-		{ provide: StateService, useClass: SubjectStateService },
 		{
 			provide: HeroDetailDialogService,
 			useClass: AngularMaterialHeroDetailDialogService
