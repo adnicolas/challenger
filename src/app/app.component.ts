@@ -4,7 +4,7 @@ import {
 	OnInit,
 	inject
 } from '@angular/core';
-import { GetData } from '@application/GetData';
+import { GetHeroes } from '@application/GetHeroes';
 import { DataService } from '@domain/DataService';
 import { ChipsComponent } from '@infrastructure/components/chips/chips.component';
 import { TableComponent } from '@infrastructure/components/table/table.component';
@@ -24,6 +24,6 @@ export class AppComponent implements OnInit {
 	private stateService = inject(SubjectStateService);
 	constructor(private dataService: DataService) {}
 	async ngOnInit(): Promise<void> {
-		await new GetData(this.dataService, this.stateService).run();
+		await new GetHeroes(this.dataService, this.stateService).run();
 	}
 }

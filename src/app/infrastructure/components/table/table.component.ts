@@ -5,7 +5,7 @@ import { MarvelHero } from '@domain/MarvelHero.interface';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
-import { SortData } from '@application/SortData';
+import { SortHeroes } from '@application/SortHeroes';
 
 const headerCapitalizeSlice = 1;
 
@@ -23,9 +23,9 @@ const headerCapitalizeSlice = 1;
 })
 export class TableComponent {
 	private stateService = inject(SubjectStateService);
-	public heroes$: Observable<MarvelHero[]> = this.stateService.data$;
-	public displayedColumns: string[] = [];
+	public heroes$: Observable<MarvelHero[]> = this.stateService.mutableHeroes$;
 	private heroes: MarvelHero[] = [];
+	public displayedColumns: string[] = [];
 
 	constructor() {
 		this.heroes$.subscribe((heroes: MarvelHero[]) => {
@@ -46,10 +46,12 @@ export class TableComponent {
 	}
 
 	public sortData(sort: Sort): void {
-		new SortData(this.stateService).run(
+		new SortHeroes(this.stateService).run(
+			{
+				property: sort.active,
+				direction: sort.direction
+			},
 			this.heroes,
-			sort.active,
-			sort.direction,
 		);
 	}
 }
