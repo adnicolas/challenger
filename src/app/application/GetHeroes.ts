@@ -1,6 +1,6 @@
 import { DataService } from '@domain/DataService';
 import { MarvelHero } from '@domain/MarvelHero.interface';
-import { StateService } from '@domain/StateService.interface';
+import { StateService } from '@domain/StateService';
 
 export class GetHeroes {
 	constructor(

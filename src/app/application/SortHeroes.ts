@@ -1,5 +1,5 @@
 import { MarvelHero } from '@domain/MarvelHero.interface';
-import { StateService } from '@domain/StateService.interface';
+import { StateService } from '@domain/StateService';
 import { SortOptions } from '@domain/SortOptions.interface';
 
 export class SortHeroes {

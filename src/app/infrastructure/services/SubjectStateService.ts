@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MarvelHero } from '@domain/MarvelHero.interface';
-import { StateService } from '@domain/StateService.interface';
+import { StateService } from '@domain/StateService';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SortOptions } from '@domain/SortOptions.interface';
 

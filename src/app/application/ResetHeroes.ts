@@ -1,8 +1,8 @@
-import { StateService } from '@domain/StateService.interface';
+import { StateService } from '@domain/StateService';
 
 export class ResetHeroes {
 	constructor(private readonly stateService: StateService) {}
-	public async run(): Promise<void> {
+	public run(): void {
 		this.stateService.resetHeroes();
 	}
 }

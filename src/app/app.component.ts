@@ -10,11 +10,16 @@ import { ChipsComponent } from '@infrastructure/components/chips/chips.component
 import { TableComponent } from '@infrastructure/components/table/table.component';
 import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
 	selector: 'challenger-root',
 	standalone: true,
-	imports: [TableComponent, ChipsComponent],
+	imports: [
+		TableComponent,
+		ChipsComponent,
+		MatDialogModule
+	],
 	templateUrl: './app.component.html',
 	providers: [{ provide: DataService, useClass: LocalDataService }],
 	styles: [],

@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+	<ng-container *ngFor="let item of data | keyvalue; let colIndex = index">
+		<div>{{ item.key }}</div>
+		<div>{{ item.value }}</div>
+	</ng-container>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="close()">Close</button>
+</div>
