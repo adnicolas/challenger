@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MarvelData } from '../../../domain/MarvelData.interface';
-import { MarvelService } from '../../../domain/MarvelService';
-import { LocalMarvelService } from '../../services/LocalMarvelService';
+import { MarvelData } from '@domain/MarvelData.interface';
+import { MarvelService } from '@domain/MarvelService';
+import { LocalMarvelService } from '@infrastructure/services/LocalMarvelService';
 import { BehaviorSubject } from 'rxjs';
 
 const headerCapitalizeSlice = 1;

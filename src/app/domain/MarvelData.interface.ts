@@ -1,4 +1,4 @@
-import { Gender } from './Gender.enum';
+import { Gender } from '@domain/Gender.enum';
 
 export interface MarvelData {
 	nameLabel: string;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MarvelData } from '../../domain/MarvelData.interface';
-import { MarvelService } from '../../domain/MarvelService';
+import { MarvelData } from '@domain/MarvelData.interface';
+import { MarvelService } from '@domain/MarvelService';
 
 @Injectable()
 export class LocalMarvelService implements MarvelService {
