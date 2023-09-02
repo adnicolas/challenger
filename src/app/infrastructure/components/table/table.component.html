@@ -1,4 +1,9 @@
-<table mat-table [dataSource]="heroes$" matSort (matSortChange)="sortData()">
+<table
+	mat-table
+	[dataSource]="heroes$"
+	matSort
+	(matSortChange)="sortData($event)"
+>
 	<ng-container
 		*ngFor="let displayedColumn of displayedColumns; let colIndex = index"
 		matColumnDef="{{ displayedColumn }}"

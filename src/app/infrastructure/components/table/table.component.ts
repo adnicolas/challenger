@@ -10,9 +10,10 @@ import { MarvelHero } from '@domain/MarvelHero.interface';
 import { DataService } from '@domain/DataService';
 import { LocalDataService } from '@infrastructure/services/LocalDataService';
 import { GetData } from '@application/GetData';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { SubjectStateService } from '@infrastructure/services/SubjectStateService';
+import { SortData } from '@application/SortData';
 
 const headerCapitalizeSlice = 1;
 
@@ -33,9 +34,11 @@ export class TableComponent implements AfterViewInit {
 	private stateService = inject(SubjectStateService);
 	public heroes$: Observable<MarvelHero[]> = this.stateService.data$;
 	public displayedColumns: string[] = [];
+	private heroes: MarvelHero[] = [];
 
 	constructor(private dataService: DataService) {
 		this.heroes$.subscribe((heroes: MarvelHero[]) => {
+			this.heroes = heroes;
 			if (heroes?.length) {
 				this.displayedColumns = Object.keys(heroes[0]);
 			}
@@ -55,5 +58,11 @@ export class TableComponent implements AfterViewInit {
 		return property;
 	}
 
-	public sortData(): void {}
+	public sortData(sort: Sort): void {
+		new SortData(this.stateService).run(
+			this.heroes,
+			sort.active,
+			sort.direction,
+		);
+	}
 }
