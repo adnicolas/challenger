@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableComponent } from './components/table/table.component';
+import { TableComponent } from './infrastructure/components/table/table.component';
 
 @Component({
 	selector: 'challenger-root',
@@ -10,6 +10,4 @@ import { TableComponent } from './components/table/table.component';
 	styles: [],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-	title = 'challenger';
-}
+export class AppComponent {}
