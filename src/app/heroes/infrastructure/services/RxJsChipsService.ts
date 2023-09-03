@@ -8,7 +8,6 @@ export class RxJsChipsService implements ChipsService {
 		[],
 	);
 	public options$: Observable<string[]> = this.optionsSrc.asObservable();
-	constructor() {}
 	public setOptions(options: string[]): void {
 		this.optionsSrc.next(options);
 	}
