@@ -31,6 +31,10 @@ import { SetHeroes } from '@heroes/application/SetHeroes';
 import { SetTableColumnsNames } from '@heroes/application/SetTableColumnsNames';
 import { SetChipsOptions } from '@heroes/application/SetChipsOptions';
 import { DomainHeroService } from '@heroes/domain/DomainHeroService';
+import { SetTableChartsData } from '@heroes/application/SetTableChartsData';
+import { ChartsDataService } from '@heroes/domain/ChartsDataService';
+import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
+import { ChartData } from '@shared/domain/ChartData.interface';
 
 @Component({
 	selector: 'challenger-root',
@@ -47,6 +51,7 @@ import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 		{ provide: HeroesDataService, useClass: LocalHeroesDataService },
 		{ provide: HeroesStateService, useClass: RxJsHeroesStateService },
 		{ provide: TableService, useClass: RxJsTableService },
+		{ provide: ChartsDataService, useClass: RxJsChartsDataService },
 		{ provide: ChipsService, useClass: RxJsChipsService },
 		{
 			provide: HeroCreationDialogService,
@@ -66,12 +71,15 @@ export class AppComponent implements OnInit {
 	public tableColumnsNames$: Observable<string[]> =
 		this.tableService.tableColumnsNames$;
 	public chipOptions$: Observable<string[]> = this.chipsService.options$;
+	public chartsData$: Observable<ChartData | null> =
+		this.chartsDataService.chartsData$;
 	// eslint-disable-next-line max-params
 	constructor(
 		private dataService: HeroesDataService,
 		private stateService: HeroesStateService,
 		private tableService: TableService,
 		private chipsService: ChipsService,
+		private chartsDataService: ChartsDataService,
 		private domainHeroService: DomainHeroService,
 		private heroCreationDialogService: HeroCreationDialogService,
 		private heroDetailDialogService: HeroDetailDialogService,
@@ -79,7 +87,10 @@ export class AppComponent implements OnInit {
 	async ngOnInit(): Promise<void> {
 		const heroes: MarvelHero[] = await new GetHeroes(this.dataService).run();
 		new SetHeroes(this.stateService).run(heroes);
-		new SetTableColumnsNames(this.tableService, this.stateService).run(heroes);
+		new SetTableColumnsNames(this.tableService).run(heroes);
+		new SetTableChartsData(this.stateService, this.chartsDataService).run(
+			heroes,
+		);
 		new SetChipsOptions(this.chipsService, this.domainHeroService).run(heroes);
 	}
 	public onCreateHero(): void {

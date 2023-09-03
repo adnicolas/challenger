@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ChartData } from '@shared/domain/ChartData.interface';
+import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
 
 @Component({
 	selector: 'challenger-bar-chart',
@@ -14,5 +14,5 @@ import { ChartData } from '@shared/domain/ChartData.interface';
 })
 export class BarChartComponent {
 	@Input() view: [number, number] = [100, 100];
-	@Input() data: ChartData[] = [];
+	@Input() data: ChartDataValue[] = [];
 }

@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ChartData } from '@shared/domain/ChartData.interface';
+import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
@@ -14,5 +14,5 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 })
 export class PieChartComponent {
 	@Input() view: [number, number] = [100, 100];
-	@Input() data: ChartData[] = [];
+	@Input() data: ChartDataValue[] = [];
 }

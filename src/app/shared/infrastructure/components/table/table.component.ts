@@ -16,6 +16,7 @@ import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { ChartData } from '@shared/domain/ChartData.interface';
 
 @Component({
 	selector: 'challenger-table',
@@ -40,8 +41,8 @@ export class TableComponent implements AfterViewInit {
 		});
 	}
 	@Input() displayedColumns$: Observable<string[]> = of([]);
+	@Input() chartsData$: Observable<ChartData[]> = of([]);
 	@Input() hidePaginator: boolean = false;
-	@Input() includeHeaderCharts: boolean = true;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
 	@Output() rowSelected: EventEmitter<unknown> = new EventEmitter<unknown>();
 

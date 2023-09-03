@@ -17,21 +17,21 @@
 		</td>
 	</ng-container>
 
-	<ng-container *ngIf="includeHeaderCharts">
+	<ng-container *ngIf="chartsData$ | async as chartsData">
 		<ng-container
 			*ngFor="let displayedColumn of displayedColumns"
 			matColumnDef="{{ displayedColumn }}-chart"
 		>
 			<th mat-header-cell *matHeaderCellDef>
-				<!--<challenger-bar-chart
-					*ngIf="displayedColumn.chartData.length > 5; else pieChartTemplate"
-					[data]="displayedColumn.chartData"
+				<challenger-bar-chart
+					*ngIf="chartsData[displayedColumn].length > 5; else pieChartTemplate"
+					[data]="chartsData[displayedColumn]"
 				></challenger-bar-chart>
 				<ng-template #pieChartTemplate>
 					<challenger-pie-chart
-						[data]="displayedColumn.chartData"
+						[data]="chartsData[displayedColumn]"
 					></challenger-pie-chart>
-				</ng-template>-->
+				</ng-template>
 			</th>
 		</ng-container>
 	</ng-container>

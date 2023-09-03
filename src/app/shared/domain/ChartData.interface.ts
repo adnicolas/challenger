@@ -1,4 +1,5 @@
+import { ChartDataValue } from './ChartDataValue.interface';
+
 export interface ChartData {
-	name: string;
-	value: number;
+	[key: string]: ChartDataValue[];
 }
