@@ -32,7 +32,8 @@ export class PieChartComponent implements OnInit {
 	@Input() margin = 50;
 	@Input() width = 750;
 	@Input() height = 600;
-	@Input() scaleProperty!: string;
+	@Input() scaleProperty: string = 'Stars';
+	@Input() textProperty: string = 'Framework';
 
 	private radius = Math.min(this.width, this.height) / 2 - this.margin;
 	private colors: any;
@@ -65,7 +66,7 @@ export class PieChartComponent implements OnInit {
 	}
 
 	private drawChart(): void {
-		const pie = d3pie<any>().value((d: any) => Number(d.Stars));
+		const pie = d3pie<any>().value((d: any) => Number(d[this.scaleProperty]));
 
 		this.svg
 			.selectAll('pieces')
@@ -86,7 +87,7 @@ export class PieChartComponent implements OnInit {
 			.data(pie(this.data))
 			.enter()
 			.append('text')
-			.text((d: any) => d.data.Framework)
+			.text((d: any) => d.data[this.textProperty])
 			.attr('transform', (d: any) => `translate(${labelLocation.centroid(d)})`)
 			.style('text-anchor', 'middle')
 			.style('font-size', 15);
