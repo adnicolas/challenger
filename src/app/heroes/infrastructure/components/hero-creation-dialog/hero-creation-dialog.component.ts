@@ -34,6 +34,7 @@ import { SubjectHeroesStateService } from '@heroes/infrastructure/services/Subje
 })
 export class HeroCreationDialogComponent {
 	private stateService = inject(SubjectHeroesStateService);
+	public genderEnum = Gender;
 
 	public creationForm = new FormGroup({
 		nameLabel: new FormControl('', [Validators.required]),

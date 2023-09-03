@@ -8,8 +8,11 @@
 			<mat-form-field>
 				<mat-label>Gender</mat-label>
 				<mat-select formControlName="genderLabel">
-					<mat-option value="male">Male</mat-option>
-					<mat-option value="female">Female</mat-option>
+					<ng-container *ngFor="let gender of genderEnum | keyvalue">
+						<mat-option value="{{ gender.value }}">{{
+							gender.value | uppercase
+						}}</mat-option>
+					</ng-container>
 				</mat-select>
 			</mat-form-field>
 			<mat-form-field>
