@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
 	async ngOnInit(): Promise<void> {
 		const heroes: MarvelHero[] = await new GetHeroes(this.dataService).run();
 		new SetHeroes(this.stateService).run(heroes);
-		new SetTableColumns(this.tableService).run(heroes);
+		new SetTableColumns(this.tableService, this.stateService).run(heroes);
 		new SetChipsOptions(this.chipsService, this.domainHeroService).run(heroes);
 	}
 	public onCreateHero(): void {

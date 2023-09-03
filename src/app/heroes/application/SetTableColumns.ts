@@ -1,10 +1,18 @@
+import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { TableService } from '@heroes/domain/TableService';
 import { ChartData } from '@shared/domain/ChartData.interface';
 import { TableColumn } from '@shared/domain/TableColumn.interface';
 
 export class SetTableColumns {
-	constructor(private readonly tableService: TableService) {}
+	constructor(
+		private readonly tableService: TableService,
+		private readonly stateService: HeroesStateService,
+	) {
+		this.stateService.filteredHeroes$.subscribe((heroes: MarvelHero[]) => {
+			this.run(heroes);
+		});
+	}
 	public async run(heroes: MarvelHero[]): Promise<void> {
 		const tableColumns: TableColumn[] = this.getTableColumnsFromHeroes(heroes);
 		this.tableService.setTableColumns(tableColumns);
