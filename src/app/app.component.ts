@@ -27,11 +27,13 @@ import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
 import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { ResetHeroes } from '@heroes/application/ResetHeroes';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'challenger-root',
 	standalone: true,
 	imports: [
+		CommonModule,
 		TableComponent,
 		ChipsComponent,
 		ButtonComponent,
