@@ -31,8 +31,7 @@ be on the table after refresh)
 
 ## Key points
 
-* Has the candidate separated the app into components(pie chart, bar chart, modal,
-table)?
+* Has the candidate separated the app into components(pie chart, bar chart, modal, table)?
 * Has the candidate created a service, custom pipes, interfaces, enums…?
 * How does the candidate communicate data between components?
 * Was the candidate able to use the data file instead of a pure API?
