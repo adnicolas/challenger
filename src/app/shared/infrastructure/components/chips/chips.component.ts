@@ -33,16 +33,21 @@ import { map, startWith } from 'rxjs/operators';
 		FormsModule
 	],
 	templateUrl: './chips.component.html',
-	styles: [],
+	styleUrls: ['./chips.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipsComponent {
 	@Input() placeholder!: string;
+	private _allOptions: string[] = [];
+	get allOptions(): string[] {
+		return this._allOptions;
+	}
 	@Input() set allOptions(options: string[]) {
+		this._allOptions = options;
 		this.filteredOptions = this.optionCtrl.valueChanges.pipe(
 			startWith(null),
 			map((option: string | null) =>
-				option ? this.filter(option, options) : options.slice(),
+				option ? this.filter(option) : this.allOptions.slice(),
 			),
 		);
 	}
@@ -88,9 +93,9 @@ export class ChipsComponent {
 		this.updated.emit(this.options);
 	}
 
-	private filter(value: string, options: string[]): string[] {
+	private filter(value: string): string[] {
 		const filterValue = value.toLowerCase();
-		return options.filter((option: string) =>
+		return this.allOptions.filter((option: string) =>
 			option.toLowerCase().includes(filterValue),
 		);
 	}
