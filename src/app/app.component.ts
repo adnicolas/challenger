@@ -28,6 +28,10 @@ import { TableService } from '@heroes/domain/TableService';
 import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
 import { ChipsService } from '@heroes/domain/ChipsService';
 import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
+import { SetHeroes } from '@heroes/application/SetHeroes';
+import { SetTableColumns } from '@heroes/application/SetTableColumns';
+import { SetChipsOptions } from '@heroes/application/SetChipsOptions';
+import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 
 @Component({
 	selector: 'challenger-root',
@@ -69,16 +73,15 @@ export class AppComponent implements OnInit {
 		private stateService: HeroesStateService,
 		private tableService: TableService,
 		private chipsService: ChipsService,
+		private domainHeroService: DomainHeroService,
 		private heroCreationDialogService: HeroCreationDialogService,
 		private heroDetailDialogService: HeroDetailDialogService,
 	) {}
 	async ngOnInit(): Promise<void> {
-		await new GetHeroes(
-			this.dataService,
-			this.stateService,
-			this.tableService,
-			this.chipsService,
-		).run();
+		const heroes: MarvelHero[] = await new GetHeroes(this.dataService).run();
+		new SetHeroes(this.stateService).run(heroes);
+		new SetTableColumns(this.tableService).run(heroes);
+		new SetChipsOptions(this.chipsService, this.domainHeroService).run(heroes);
 	}
 	public onCreateHero(): void {
 		new OpenHeroCreation(
