@@ -17,8 +17,8 @@ We want to display Marvel superheroes on a table, and get some key values from t
     * [x] I want to be able to sort values by each column
     * [x] Using the [chips component](https://material.angular.io/components/chips/examples), I want to type one or more hero names, and display on the table only those heroes
     * [x] When I click on a row, I want to display the whole heroe info on a modal
-* [ ] Add a button on the page that says, “create hero”.
-* [ ] The button will open a form on a modal or [expansion panel](https://material.angular.io/components/expansion/overview) that will allow you to create a hero and by submitting the hero will go on top of the table.
+* [x] Add a button on the page that says, “create hero”.
+* [x] The button will open a form on a modal or [expansion panel](https://material.angular.io/components/expansion/overview) that will allow you to create a hero and by submitting the hero will go on top of the table.
 * [ ] Using [D3 charts](https://d3js.org/) create a chart at the top of each column that will represent the values of the column.
     * [ ] If there are only 5 diferente values or less, use a pie chart
     * [ ] If there are more than 5 different values, use a bar chart
@@ -27,8 +27,7 @@ We want to display Marvel superheroes on a table, and get some key values from t
 be on the table after refresh)
 * **Bonus task 4** (Seniors have to choose this one or Task 4)
     * [ ] On scroll (up/down) the header with the charts will be fix and not moving with the scroll
-    * [ ] We are loading a big amount of data, creating a lazy scroll or pagination to avoid
-rendering so many items.
+    * [x] We are loading a big amount of data, creating a lazy scroll or pagination to avoid rendering so many items.
 
 ## Key points
 
