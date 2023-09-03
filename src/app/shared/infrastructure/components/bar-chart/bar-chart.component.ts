@@ -14,22 +14,5 @@ import { ChartData } from '@shared/domain/ChartData.interface';
 })
 export class BarChartComponent {
 	@Input() view: [number, number] = [100, 100];
-	@Input() data: ChartData[] = [
-		{
-			name: 'Germany',
-			value: 8940000
-		},
-		{
-			name: 'USA',
-			value: 5000000
-		},
-		{
-			name: 'France',
-			value: 7200000
-		},
-		{
-			name: 'UK',
-			value: 6200000
-		}
-	];
+	@Input() data: ChartData[] = [];
 }
