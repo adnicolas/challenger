@@ -38,6 +38,18 @@ be on the table after refresh)
 * Was the candidate able to use the components of a ui lib to create the app?
 * Was the candidate able to use D3 to create the charts?
 
+## Posibles mejoras
+
+* [ ] Revisar necesidad de mantener heroes$ y mutableHeroes$ en estado
+* [ ] Investigar por qué con inject() funciona pero con providers no algunos componentes y servicios (importante para inversión de dependencias)
+* [ ] Refactorizar HeroesStateService y SubjectHeroesStateService, tiene demasiadas responsabilidades
+* [ ] Hacer un CreationDialogComponent reutilizable
+* [ ] Actualizar listado de options para chips cuando se crea un nuevo héroe (DomainEvent?)
+* [ ] Aprovechar evento de dominio de creación para cerrar CreationDialog
+* [ ] Probar solución basada en Angular signals
+* [ ] Añadir algún test unitario con Jest
+* [ ] Añadir algún test unitario con Cypress
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
