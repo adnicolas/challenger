@@ -1,9 +1,13 @@
-<div mat-dialog-content>
-	<ng-container *ngFor="let item of data | keyvalue; let colIndex = index">
-		<div>{{ item.key }}</div>
-		<div>{{ item.value }}</div>
-	</ng-container>
-</div>
-<div mat-dialog-actions>
-	<challenger-button text="Close" (clicked)="close()"></challenger-button>
+<div class="hero-detail-dialog-main-container">
+	<div mat-dialog-content>
+		<ng-container *ngFor="let item of data | keyvalue; let colIndex = index">
+			<div class="hero-detail-dialog-data-row">
+				<div>{{ item.key }}</div>
+				<div>{{ item.value }}</div>
+			</div>
+		</ng-container>
+	</div>
+	<div mat-dialog-actions class="hero-detail-dialog-buttons-container">
+		<challenger-button text="Close" (clicked)="close()"></challenger-button>
+	</div>
 </div>

@@ -17,7 +17,7 @@ import { ButtonComponent } from '@shared/infrastructure/components/button/button
 		ButtonComponent
 	],
 	templateUrl: './hero-detail-dialog.component.html',
-	styles: []
+	styleUrls: ['./hero-detail-dialog.component.scss']
 })
 export class HeroDetailDialogComponent {
 	constructor(

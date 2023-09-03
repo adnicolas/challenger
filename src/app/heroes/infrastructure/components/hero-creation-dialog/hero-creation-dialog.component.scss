@@ -1,0 +1,12 @@
+.hero-creation-dialog-main-container {
+	max-height: 85vh;
+	padding: 1rem;
+	.hero-creation-dialog-content > form {
+		display: flex;
+		flex-direction: column;
+	}
+	.hero-creation-dialog-buttons-container {
+		display: flex;
+		justify-content: space-evenly;
+	}
+}

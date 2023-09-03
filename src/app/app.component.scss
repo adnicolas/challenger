@@ -1,0 +1,9 @@
+.main-container {
+	margin: 1rem;
+	.header-components-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+}

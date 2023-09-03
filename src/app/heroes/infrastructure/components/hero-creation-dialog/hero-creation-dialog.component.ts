@@ -30,7 +30,7 @@ import { SubjectHeroesStateService } from '@heroes/infrastructure/services/Subje
 		ReactiveFormsModule
 	],
 	templateUrl: './hero-creation-dialog.component.html',
-	styles: []
+	styleUrls: ['./hero-creation-dialog.component.scss']
 })
 export class HeroCreationDialogComponent {
 	private stateService = inject(SubjectHeroesStateService);

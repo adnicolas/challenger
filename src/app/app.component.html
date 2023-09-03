@@ -1,16 +1,20 @@
-<challenger-chips
-	placeholder="New hero..."
-	[allOptions]="allOptions"
-	(updated)="onUpdateChipsSelection($event)"
-	(resetted)="onResetChipsSelection()"
-></challenger-chips>
-<challenger-button
-	text="Create hero"
-	(clicked)="onCreateHero()"
-></challenger-button>
-<challenger-table
-	[data$]="mutableHeroes$"
-	[displayedColumns]="displayedColumns"
-	(sorted)="onSortHeroes($event)"
-	(rowSelected)="onSelectHero($event)"
-></challenger-table>
+<div class="main-container">
+	<div class="header-components-container">
+		<challenger-chips
+			placeholder="Filter by hero name..."
+			[allOptions]="allOptions"
+			(updated)="onUpdateChipsSelection($event)"
+			(resetted)="onResetChipsSelection()"
+		></challenger-chips>
+		<challenger-button
+			text="Create hero"
+			(clicked)="onCreateHero()"
+		></challenger-button>
+	</div>
+	<challenger-table
+		[data$]="mutableHeroes$"
+		[displayedColumns]="displayedColumns"
+		(sorted)="onSortHeroes($event)"
+		(rowSelected)="onSelectHero($event)"
+	></challenger-table>
+</div>

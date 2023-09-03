@@ -49,7 +49,7 @@ import { ResetHeroes } from '@heroes/application/ResetHeroes';
 			useClass: AngularMaterialHeroDetailDialogService
 		}
 	],
-	styles: [],
+	styleUrls: ['./app.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
