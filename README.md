@@ -19,14 +19,14 @@ We want to display Marvel superheroes on a table, and get some key values from t
     * [x] When I click on a row, I want to display the whole heroe info on a modal
 * [x] Add a button on the page that says, “create hero”.
 * [x] The button will open a form on a modal or [expansion panel](https://material.angular.io/components/expansion/overview) that will allow you to create a hero and by submitting the hero will go on top of the table.
-* [ ] Using [D3 charts](https://d3js.org/) create a chart at the top of each column that will represent the values of the column.
-    * [ ] If there are only 5 diferente values or less, use a pie chart
-    * [ ] If there are more than 5 different values, use a bar chart
+* [x] Using [D3 charts](https://d3js.org/) create a chart at the top of each column that will represent the values of the column.
+    * [x] If there are only 5 diferent values or less, use a pie chart
+    * [x] If there are more than 5 different values, use a bar chart
 * **Bonus task 3** (Seniors have to choose this one or Task 4)
     * [ ] Add options to delete and modify current heroes. After adding, deleting, modifying heroes, data on the table must be persistent (They will
 be on the table after refresh)
 * **Bonus task 4** (Seniors have to choose this one or Task 4)
-    * [ ] On scroll (up/down) the header with the charts will be fix and not moving with the scroll
+    * [x] On scroll (up/down) the header with the charts will be fix and not moving with the scroll
     * [x] We are loading a big amount of data, creating a lazy scroll or pagination to avoid rendering so many items.
 
 ## Key points
