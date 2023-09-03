@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
 import { MatInputModule } from '@angular/material/input';
@@ -49,15 +49,13 @@ export class HeroCreationDialogComponent {
 
 	constructor(
 		public dialogRef: MatDialogRef<unknown>,
-		private stateService: HeroesStateService,
+		@Inject(MAT_DIALOG_DATA) private data: HeroesStateService,
 	) {}
 	public close(): void {
 		this.dialogRef.close();
 	}
 	public save(): void {
-		new CreateHero(this.stateService).run(
-			this.creationForm.value as MarvelHero,
-		);
+		new CreateHero(this.data).run(this.creationForm.value as MarvelHero);
 		this.close();
 	}
 }

@@ -81,7 +81,10 @@ export class AppComponent implements OnInit {
 		).run();
 	}
 	public onCreateHero(): void {
-		new OpenHeroCreation(this.heroCreationDialogService).run();
+		new OpenHeroCreation(
+			this.heroCreationDialogService,
+			this.stateService,
+		).run();
 	}
 	public onSortHeroes(options: SortOptions): void {
 		new SortHeroes(this.stateService).run(options);
