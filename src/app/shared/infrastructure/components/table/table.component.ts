@@ -40,10 +40,6 @@ export class TableComponent implements AfterViewInit {
 			this.dataSource.data = data;
 		});
 	}
-	//private _displayedColumns: TableColumn[] = [];
-	/*get displayedColumns(): TableColumn[] {
-		return this._displayedColumns;
-	}*/
 	@Input() displayedColumns$: Observable<TableColumn[]> = of([]);
 	@Input() hidePaginator: boolean = false;
 	@Input() includeHeaderCharts: boolean = true;
@@ -52,7 +48,6 @@ export class TableComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	public dataSource = new MatTableDataSource();
-	//public displayedColumnsNames: string[] = [];
 
 	ngAfterViewInit(): void {
 		this.dataSource.paginator = this.paginator;
