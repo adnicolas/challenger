@@ -13,7 +13,7 @@
 	</div>
 	<challenger-table
 		[data$]="filteredHeroes$"
-		[displayedColumns$]="tableColumns$"
+		[displayedColumns$]="tableColumnsNames$"
 		(sorted)="onSortHeroes($event)"
 		(rowSelected)="onSelectHero($event)"
 	></challenger-table>

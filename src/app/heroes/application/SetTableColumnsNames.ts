@@ -1,10 +1,8 @@
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { TableService } from '@heroes/domain/TableService';
-import { ChartData } from '@shared/domain/ChartData.interface';
-import { TableColumn } from '@shared/domain/TableColumn.interface';
 
-export class SetTableColumns {
+export class SetTableColumnsNames {
 	constructor(
 		private readonly tableService: TableService,
 		private readonly stateService: HeroesStateService,
@@ -14,11 +12,13 @@ export class SetTableColumns {
 		});
 	}
 	public async run(heroes: MarvelHero[]): Promise<void> {
-		const tableColumns: TableColumn[] = this.getTableColumnsFromHeroes(heroes);
-		this.tableService.setTableColumns(tableColumns);
+		const tableColumnsNames: string[] =
+			this.getTableColumnsNamesFromHeroes(heroes);
+		this.tableService.setTableColumnsNames(tableColumnsNames);
 	}
-	private getTableColumnsFromHeroes(heroes: MarvelHero[]): TableColumn[] {
-		const tableColumns: TableColumn[] = Object.keys(heroes[0]).map(
+	private getTableColumnsNamesFromHeroes(heroes: MarvelHero[]): string[] {
+		return Object.keys(heroes[0]).map((key) => key);
+		/*const tableColumns: TableColumn[] = Object.keys(heroes[0]).map(
 			(name: string) => {
 				const groupedData = this.groupBy(heroes, name);
 				const chartData: ChartData[] = [];
@@ -35,7 +35,7 @@ export class SetTableColumns {
 				};
 			},
 		);
-		return tableColumns;
+		return tableColumns;*/
 	}
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private groupBy(data: MarvelHero[], key: string): any {

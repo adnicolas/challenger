@@ -16,7 +16,6 @@ import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
-import { TableColumn } from '@shared/domain/TableColumn.interface';
 
 @Component({
 	selector: 'challenger-table',
@@ -40,7 +39,7 @@ export class TableComponent implements AfterViewInit {
 			this.dataSource.data = data;
 		});
 	}
-	@Input() displayedColumns$: Observable<TableColumn[]> = of([]);
+	@Input() displayedColumns$: Observable<string[]> = of([]);
 	@Input() hidePaginator: boolean = false;
 	@Input() includeHeaderCharts: boolean = true;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
@@ -63,13 +62,11 @@ export class TableComponent implements AfterViewInit {
 		this.rowSelected.emit(row);
 	}
 
-	public getChartColumnsDefs(displayedColumns: TableColumn[]): string[] {
-		return displayedColumns.map(
-			(column: TableColumn) => `${column.name}-chart`,
-		);
+	public getChartColumnsDefs(displayedColumns: string[]): string[] {
+		return displayedColumns.map((column: string) => `${column}-chart`);
 	}
 
-	public getColumnsNames(displayedColumns: TableColumn[]): string[] {
-		return displayedColumns.map((column: TableColumn) => column.name);
+	public getColumnsNames(displayedColumns: string[]): string[] {
+		return displayedColumns.map((column: string) => column);
 	}
 }

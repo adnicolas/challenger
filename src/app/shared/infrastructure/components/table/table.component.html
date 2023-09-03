@@ -7,23 +7,23 @@
 >
 	<ng-container
 		*ngFor="let displayedColumn of displayedColumns; let colIndex = index"
-		matColumnDef="{{ displayedColumn.name }}"
+		matColumnDef="{{ displayedColumn }}"
 	>
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>
-			{{ displayedColumn.name | formatColumnName }}
+			{{ displayedColumn | formatColumnName }}
 		</th>
 		<td mat-cell *matCellDef="let element">
-			{{ element[displayedColumn.name] }}
+			{{ element[displayedColumn] }}
 		</td>
 	</ng-container>
 
 	<ng-container *ngIf="includeHeaderCharts">
 		<ng-container
 			*ngFor="let displayedColumn of displayedColumns"
-			matColumnDef="{{ displayedColumn.name }}-chart"
+			matColumnDef="{{ displayedColumn }}-chart"
 		>
 			<th mat-header-cell *matHeaderCellDef>
-				<challenger-bar-chart
+				<!--<challenger-bar-chart
 					*ngIf="displayedColumn.chartData.length > 5; else pieChartTemplate"
 					[data]="displayedColumn.chartData"
 				></challenger-bar-chart>
@@ -31,7 +31,7 @@
 					<challenger-pie-chart
 						[data]="displayedColumn.chartData"
 					></challenger-pie-chart>
-				</ng-template>
+				</ng-template>-->
 			</th>
 		</ng-container>
 	</ng-container>

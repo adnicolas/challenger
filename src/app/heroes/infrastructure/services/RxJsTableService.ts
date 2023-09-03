@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { TableColumn } from '@shared/domain/TableColumn.interface';
 import { TableService } from '@heroes/domain/TableService';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class RxJsTableService implements TableService {
-	private tableColumnsSrc: BehaviorSubject<TableColumn[]> = new BehaviorSubject<
-		TableColumn[]
+	private tableColumnsNamesSrc: BehaviorSubject<string[]> = new BehaviorSubject<
+		string[]
 	>([]);
-	public tableColumns$: Observable<TableColumn[]> =
-		this.tableColumnsSrc.asObservable();
+	public tableColumnsNames$: Observable<string[]> =
+		this.tableColumnsNamesSrc.asObservable();
 
-	public setTableColumns(columns: TableColumn[]): void {
-		this.tableColumnsSrc.next(columns);
+	public setTableColumnsNames(columns: string[]): void {
+		this.tableColumnsNamesSrc.next(columns);
 	}
 }

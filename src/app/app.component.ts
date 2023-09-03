@@ -22,14 +22,13 @@ import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
 import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { ResetFilter } from '@heroes/application/ResetFilter';
 import { CommonModule } from '@angular/common';
-import { TableColumn } from '@shared/domain/TableColumn.interface';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { TableService } from '@heroes/domain/TableService';
 import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
 import { ChipsService } from '@heroes/domain/ChipsService';
 import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
 import { SetHeroes } from '@heroes/application/SetHeroes';
-import { SetTableColumns } from '@heroes/application/SetTableColumns';
+import { SetTableColumnsNames } from '@heroes/application/SetTableColumnsNames';
 import { SetChipsOptions } from '@heroes/application/SetChipsOptions';
 import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 
@@ -64,8 +63,8 @@ import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 export class AppComponent implements OnInit {
 	public filteredHeroes$: Observable<MarvelHero[]> =
 		this.stateService.filteredHeroes$;
-	public tableColumns$: Observable<TableColumn[]> =
-		this.tableService.tableColumns$;
+	public tableColumnsNames$: Observable<string[]> =
+		this.tableService.tableColumnsNames$;
 	public chipOptions$: Observable<string[]> = this.chipsService.options$;
 	// eslint-disable-next-line max-params
 	constructor(
@@ -80,7 +79,7 @@ export class AppComponent implements OnInit {
 	async ngOnInit(): Promise<void> {
 		const heroes: MarvelHero[] = await new GetHeroes(this.dataService).run();
 		new SetHeroes(this.stateService).run(heroes);
-		new SetTableColumns(this.tableService, this.stateService).run(heroes);
+		new SetTableColumnsNames(this.tableService, this.stateService).run(heroes);
 		new SetChipsOptions(this.chipsService, this.domainHeroService).run(heroes);
 	}
 	public onCreateHero(): void {
