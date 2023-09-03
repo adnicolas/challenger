@@ -4,7 +4,7 @@ import { HeroesDataService } from '@heroes/domain/HeroesDataService';
 import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
 import { TableComponent } from '@shared/infrastructure/components/table/table.component';
 import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
-import { SubjectHeroesStateService } from '@heroes/infrastructure/services/SubjectHeroesStateService';
+import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
 import { OpenHeroCreation } from '@heroes/application/OpenHeroCreation';
@@ -19,13 +19,15 @@ import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { SortHeroes } from '@heroes/application/SortHeroes';
 import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
-import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { FilterHeroes } from '@heroes/application/FilterHeroes';
-import { ResetHeroes } from '@heroes/application/ResetHeroes';
+import { ResetFilter } from '@heroes/application/ResetFilter';
 import { CommonModule } from '@angular/common';
 import { TableColumn } from '@shared/domain/TableColumn.interface';
-import { ChartData } from '@shared/domain/ChartData.interface';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
+import { TableService } from '@heroes/domain/TableService';
+import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
+import { ChipsService } from '@heroes/domain/ChipsService';
+import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
 
 @Component({
 	selector: 'challenger-root',
@@ -40,7 +42,9 @@ import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 	templateUrl: './app.component.html',
 	providers: [
 		{ provide: HeroesDataService, useClass: LocalHeroesDataService },
-		{ provide: HeroesStateService, useClass: SubjectHeroesStateService },
+		{ provide: HeroesStateService, useClass: RxJsHeroesStateService },
+		{ provide: TableService, useClass: RxJsTableService },
+		{ provide: ChipsService, useClass: RxJsChipsService },
 		{
 			provide: HeroCreationDialogService,
 			useClass: AngularMaterialHeroCreationDialogService
@@ -54,80 +58,42 @@ import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-	public mutableHeroes$: Observable<MarvelHero[]> =
-		this.stateService.mutableHeroes$;
-	public tableColumns: TableColumn[] = [];
-	public chipOptions: string[] = [];
-	private heroes: MarvelHero[] = [];
+	public filteredHeroes$: Observable<MarvelHero[]> =
+		this.stateService.filteredHeroes$;
+	public tableColumns$: Observable<TableColumn[]> =
+		this.tableService.tableColumns$;
+	public chipOptions$: Observable<string[]> = this.chipsService.options$;
 	// eslint-disable-next-line max-params
 	constructor(
 		private dataService: HeroesDataService,
 		private stateService: HeroesStateService,
-		private domainHeroService: DomainHeroService,
+		private tableService: TableService,
+		private chipsService: ChipsService,
 		private heroCreationDialogService: HeroCreationDialogService,
 		private heroDetailDialogService: HeroDetailDialogService,
 	) {}
 	async ngOnInit(): Promise<void> {
-		await new GetHeroes(this.dataService, this.stateService).run();
-		this.stateService.heroes$.subscribe((heroes: MarvelHero[]) => {
-			if (heroes?.length) {
-				this.tableColumns = this.getTableColumns(heroes);
-				this.chipOptions = this.getChipOptions(heroes);
-			}
-		});
-		this.mutableHeroes$.subscribe((heroes: MarvelHero[]) => {
-			this.heroes = heroes;
-		});
+		await new GetHeroes(
+			this.dataService,
+			this.stateService,
+			this.tableService,
+			this.chipsService,
+		).run();
 	}
 	public onCreateHero(): void {
 		new OpenHeroCreation(this.heroCreationDialogService).run();
 	}
 	public onSortHeroes(options: SortOptions): void {
-		new SortHeroes(this.stateService).run(options, this.heroes);
+		new SortHeroes(this.stateService).run(options);
 	}
 	public onSelectHero(hero: unknown): void {
 		new OpenHeroDetail(this.heroDetailDialogService).run(hero as MarvelHero);
 	}
 	public onUpdateChipsSelection(heroesNames: string[]): void {
-		new FilterHeroes(this.stateService, this.domainHeroService).run(
-			heroesNames,
-		);
+		new FilterHeroes(this.stateService).run(heroesNames);
 	}
-	public onResetChipsSelection(): void {
-		new ResetHeroes(this.stateService).run();
+	public onResetFilter(): void {
+		new ResetFilter(this.stateService).run();
 		new SortHeroes(this.stateService).run();
-	}
-	private getChipOptions(heroes: MarvelHero[]): string[] {
-		return heroes.map((hero: MarvelHero) =>
-			this.domainHeroService.getHeroName(hero),
-		);
-	}
-	private getTableColumns(heroes: MarvelHero[]): TableColumn[] {
-		return Object.keys(heroes[0]).map((name: string) => {
-			const groupedData = this.groupBy(heroes, name);
-			const chartData: ChartData[] = [];
-			for (const [key, value] of Object.entries(groupedData)) {
-				chartData.push({
-					name: key,
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					value: (value as any[]).length
-				});
-			}
-			return {
-				name,
-				chartData
-			};
-		});
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private groupBy(data: MarvelHero[], key: string): any {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return data.reduce((storage: any, item: MarvelHero) => {
-			const group = item[key as keyof MarvelHero];
-			storage[group] = storage[group] || [];
-			storage[group].push(item);
-			return storage;
-		}, {});
 	}
 }

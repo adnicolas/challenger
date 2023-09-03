@@ -3,6 +3,7 @@
 	[dataSource]="dataSource"
 	matSort
 	(matSortChange)="sortData($event)"
+	*ngIf="displayedColumns$ | async as displayedColumns"
 >
 	<ng-container
 		*ngFor="let displayedColumn of displayedColumns; let colIndex = index"
@@ -35,12 +36,15 @@
 		</ng-container>
 	</ng-container>
 
-	<tr mat-header-row *matHeaderRowDef="displayedColumnsNames"></tr>
-	<tr mat-header-row *matHeaderRowDef="getChartColumnsDefs()"></tr>
+	<tr mat-header-row *matHeaderRowDef="getColumnsNames(displayedColumns)"></tr>
+	<tr
+		mat-header-row
+		*matHeaderRowDef="getChartColumnsDefs(displayedColumns)"
+	></tr>
 	¡
 	<tr
 		mat-row
-		*matRowDef="let row; columns: displayedColumnsNames"
+		*matRowDef="let row; columns: getColumnsNames(displayedColumns)"
 		(click)="selectRow(row)"
 		style="cursor: pointer"
 	></tr>

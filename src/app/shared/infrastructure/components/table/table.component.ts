@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule, Sort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
@@ -40,16 +40,11 @@ export class TableComponent implements AfterViewInit {
 			this.dataSource.data = data;
 		});
 	}
-	private _displayedColumns: TableColumn[] = [];
-	get displayedColumns(): TableColumn[] {
+	//private _displayedColumns: TableColumn[] = [];
+	/*get displayedColumns(): TableColumn[] {
 		return this._displayedColumns;
-	}
-	@Input() set displayedColumns(columns: TableColumn[]) {
-		this._displayedColumns = columns;
-		this.displayedColumnsNames = columns.map(
-			(column: TableColumn) => column.name,
-		);
-	}
+	}*/
+	@Input() displayedColumns$: Observable<TableColumn[]> = of([]);
 	@Input() hidePaginator: boolean = false;
 	@Input() includeHeaderCharts: boolean = true;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
@@ -57,7 +52,7 @@ export class TableComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	public dataSource = new MatTableDataSource();
-	public displayedColumnsNames: string[] = [];
+	//public displayedColumnsNames: string[] = [];
 
 	ngAfterViewInit(): void {
 		this.dataSource.paginator = this.paginator;
@@ -73,9 +68,13 @@ export class TableComponent implements AfterViewInit {
 		this.rowSelected.emit(row);
 	}
 
-	public getChartColumnsDefs(): string[] {
-		return this.displayedColumns.map(
+	public getChartColumnsDefs(displayedColumns: TableColumn[]): string[] {
+		return displayedColumns.map(
 			(column: TableColumn) => `${column.name}-chart`,
 		);
+	}
+
+	public getColumnsNames(displayedColumns: TableColumn[]): string[] {
+		return displayedColumns.map((column: TableColumn) => column.name);
 	}
 }

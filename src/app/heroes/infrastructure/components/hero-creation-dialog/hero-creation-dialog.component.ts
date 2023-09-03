@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { Gender } from '@heroes/domain/Gender.enum';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
-import { SubjectHeroesStateService } from '@heroes/infrastructure/services/SubjectHeroesStateService';
+import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 
 @Component({
@@ -30,7 +30,7 @@ import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 		MatSelectModule,
 		ReactiveFormsModule
 	],
-	providers: [{ provide: HeroesStateService, useClass: SubjectHeroesStateService }],
+	providers: [{ provide: HeroesStateService, useClass: RxJsHeroesStateService }],
 	templateUrl: './hero-creation-dialog.component.html',
 	styleUrls: ['./hero-creation-dialog.component.scss']
 })

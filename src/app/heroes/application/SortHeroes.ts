@@ -6,26 +6,22 @@ export class SortHeroes {
 	private heroes: MarvelHero[] = [];
 	private sortOptions: SortOptions | null = null;
 	constructor(private readonly stateService: HeroesStateService) {
-		this.stateService.heroes$.subscribe((heroes: MarvelHero[]) => {
+		this.stateService.filteredHeroes$.subscribe((heroes: MarvelHero[]) => {
 			this.heroes = heroes;
 		});
-		this.stateService.sortOptions$.subscribe((options: SortOptions | null) => {
-			this.sortOptions = options;
-		});
 	}
-	public run(options?: SortOptions, heroes?: MarvelHero[]): void {
-		const heroesToSort: MarvelHero[] = heroes ?? this.heroes;
+	public run(options?: SortOptions): void {
 		const sortOptions: SortOptions | null = options ?? this.sortOptions;
-		let sortedHeroes: MarvelHero[] = heroesToSort;
+		let sortedHeroes: MarvelHero[] = this.heroes;
 		if (sortOptions) {
 			if (sortOptions.direction === 'asc') {
-				sortedHeroes = this.sortAscending(heroesToSort, sortOptions.property);
+				sortedHeroes = this.sortAscending(sortedHeroes, sortOptions.property);
 			} else if (sortOptions.direction === 'desc') {
-				sortedHeroes = this.sortDescending(heroesToSort, sortOptions.property);
+				sortedHeroes = this.sortDescending(sortedHeroes, sortOptions.property);
 			}
-			this.stateService.setSortOptions(sortOptions);
+			this.sortOptions = sortOptions;
 		}
-		this.stateService.updateHeroes(sortedHeroes);
+		this.stateService.updateFilteredHeroes(sortedHeroes);
 	}
 
 	private sortAscending(heroes: MarvelHero[], property: string): MarvelHero[] {

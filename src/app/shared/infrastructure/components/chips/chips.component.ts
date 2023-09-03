@@ -42,14 +42,16 @@ export class ChipsComponent {
 	get allOptions(): string[] {
 		return this._allOptions;
 	}
-	@Input() set allOptions(options: string[]) {
-		this._allOptions = options;
-		this.filteredOptions = this.optionCtrl.valueChanges.pipe(
-			startWith(null),
-			map((option: string | null) =>
-				option ? this.filter(option) : this.allOptions.slice(),
-			),
-		);
+	@Input() set allOptions$(obs: Observable<string[]>) {
+		obs.subscribe((options: string[]) => {
+			this._allOptions = options;
+			this.filteredOptions = this.optionCtrl.valueChanges.pipe(
+				startWith(null),
+				map((option: string | null) =>
+					option ? this.filter(option) : this.allOptions.slice(),
+				),
+			);
+		});
 	}
 
 	@Output() updated: EventEmitter<string[]> = new EventEmitter<string[]>();
