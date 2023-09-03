@@ -9,5 +9,6 @@ export abstract class HeroesStateService {
 	public abstract updateHeroes(heroes: MarvelHero[]): void;
 	public abstract setHeroes(heroes: MarvelHero[]): void;
 	public abstract resetHeroes(): void;
+	public abstract addHero(hero: MarvelHero): void;
 	public abstract setSortOptions(options: SortOptions): void;
 }

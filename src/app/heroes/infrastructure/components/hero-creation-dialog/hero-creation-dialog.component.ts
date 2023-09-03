@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +13,9 @@ import {
 	ReactiveFormsModule,
 	FormGroup
 } from '@angular/forms';
+import { Gender } from '@heroes/domain/Gender.enum';
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
+import { SubjectHeroesStateService } from '@heroes/infrastructure/services/SubjectHeroesStateService';
 
 @Component({
 	selector: 'challenger-hero-creation-dialog',
@@ -30,13 +33,16 @@ import {
 	styles: []
 })
 export class HeroCreationDialogComponent {
+	private stateService = inject(SubjectHeroesStateService);
+
 	public creationForm = new FormGroup({
-		name: new FormControl('', [Validators.required]),
-		citizenship: new FormControl('', [Validators.required]),
-		creator: new FormControl('', [Validators.required]),
-		skills: new FormControl('', [Validators.required]),
-		occupation: new FormControl('', [Validators.required]),
-		memberOf: new FormControl('', [Validators.required])
+		nameLabel: new FormControl('', [Validators.required]),
+		citizenshipLabel: new FormControl('', [Validators.required]),
+		creatorLabel: new FormControl('', [Validators.required]),
+		skillsLabel: new FormControl('', [Validators.required]),
+		occupationLabel: new FormControl('', [Validators.required]),
+		memberOfLabel: new FormControl('', [Validators.required]),
+		genderLabel: new FormControl(Gender.MALE, [Validators.required])
 	});
 
 	constructor(public dialogRef: MatDialogRef<unknown>) {}
@@ -44,6 +50,9 @@ export class HeroCreationDialogComponent {
 		this.dialogRef.close();
 	}
 	public save(): void {
-		new CreateHero().run();
+		new CreateHero(this.stateService).run(
+			this.creationForm.value as MarvelHero,
+		);
+		this.close();
 	}
 }

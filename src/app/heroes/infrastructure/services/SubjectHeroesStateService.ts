@@ -34,4 +34,10 @@ export class SubjectHeroesStateService implements HeroesStateService {
 	public setSortOptions(options: SortOptions): void {
 		this.sortOptionsSrc.next(options);
 	}
+
+	public addHero(hero: MarvelHero): void {
+		const heroes: MarvelHero[] = this.mutableHeroesSrc.getValue();
+		heroes.unshift(hero);
+		this.mutableHeroesSrc.next(heroes);
+	}
 }

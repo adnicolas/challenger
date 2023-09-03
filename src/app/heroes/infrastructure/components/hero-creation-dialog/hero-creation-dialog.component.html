@@ -3,34 +3,34 @@
 	<form [formGroup]="creationForm">
 		<mat-form-field>
 			<mat-label>Name</mat-label>
-			<input matInput formControlName="name" required />
+			<input matInput formControlName="nameLabel" required />
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Gender</mat-label>
-			<mat-select>
-				<mat-option value="one">First option</mat-option>
-				<mat-option value="two">Second option</mat-option>
+			<mat-select formControlName="genderLabel">
+				<mat-option value="male">Male</mat-option>
+				<mat-option value="female">Female</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Citizenship</mat-label>
-			<input matInput formControlName="citizenship" required />
+			<input matInput formControlName="citizenshipLabel" required />
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Skills</mat-label>
-			<input matInput formControlName="skills" />
+			<input matInput formControlName="skillsLabel" />
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Occupation</mat-label>
-			<input matInput formControlName="occupation" required />
+			<input matInput formControlName="occupationLabel" required />
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>MemberOf</mat-label>
-			<input matInput formControlName="memberOf" required />
+			<input matInput formControlName="memberOfLabel" required />
 		</mat-form-field>
 		<mat-form-field>
 			<mat-label>Creator</mat-label>
-			<input matInput formControlName="creator" required />
+			<input matInput formControlName="creatorLabel" required />
 		</mat-form-field>
 	</form>
 </div>
