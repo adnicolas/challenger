@@ -2,7 +2,7 @@
 	<div class="header-components-container">
 		<challenger-chips
 			placeholder="Filter by hero name..."
-			[allOptions]="allOptions"
+			[allOptions]="chipOptions"
 			(updated)="onUpdateChipsSelection($event)"
 			(resetted)="onResetChipsSelection()"
 		></challenger-chips>
@@ -13,7 +13,7 @@
 	</div>
 	<challenger-table
 		[data$]="mutableHeroes$"
-		[displayedColumns]="displayedColumns"
+		[displayedColumns]="tableColumns"
 		(sorted)="onSortHeroes($event)"
 		(rowSelected)="onSelectHero($event)"
 	></challenger-table>

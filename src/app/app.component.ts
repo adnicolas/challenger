@@ -58,8 +58,8 @@ export class AppComponent implements OnInit {
 	private stateService = inject(SubjectHeroesStateService);
 	public mutableHeroes$: Observable<MarvelHero[]> =
 		this.stateService.mutableHeroes$;
-	public displayedColumns: string[] = [];
-	public allOptions: string[] = [];
+	public tableColumns: string[] = [];
+	public chipOptions: string[] = [];
 	private heroes: MarvelHero[] = [];
 	// eslint-disable-next-line max-params
 	constructor(
@@ -72,12 +72,9 @@ export class AppComponent implements OnInit {
 		await new GetHeroes(this.dataService, this.stateService).run();
 		this.stateService.heroes$.subscribe((heroes: MarvelHero[]) => {
 			if (heroes?.length) {
-				this.displayedColumns = Object.keys(heroes[0]);
+				this.tableColumns = this.getTableColumns(heroes);
+				this.chipOptions = this.getChipOptions(heroes);
 			}
-			const heroesNames: string[] = heroes.map((hero: MarvelHero) =>
-				this.domainHeroService.getHeroName(hero),
-			);
-			this.allOptions = heroesNames;
 		});
 		this.mutableHeroes$.subscribe((heroes: MarvelHero[]) => {
 			this.heroes = heroes;
@@ -100,5 +97,13 @@ export class AppComponent implements OnInit {
 	public onResetChipsSelection(): void {
 		new ResetHeroes(this.stateService).run();
 		new SortHeroes(this.stateService).run();
+	}
+	private getChipOptions(heroes: MarvelHero[]): string[] {
+		return heroes.map((hero: MarvelHero) =>
+			this.domainHeroService.getHeroName(hero),
+		);
+	}
+	private getTableColumns(heroes: MarvelHero[]): string[] {
+		return Object.keys(heroes[0]);
 	}
 }
