@@ -1,6 +1,16 @@
-<challenger-chips></challenger-chips>
+<challenger-chips
+	placeholder="New hero..."
+	[allOptions]="allOptions"
+	(updated)="onUpdateChipsSelection($event)"
+	(resetted)="onResetChipsSelection()"
+></challenger-chips>
 <challenger-button
 	text="Create hero"
 	(clicked)="onCreateHero()"
 ></challenger-button>
-<challenger-table></challenger-table>
+<challenger-table
+	[data$]="mutableHeroes$"
+	[displayedColumns]="displayedColumns"
+	(sorted)="onSortHeroes($event)"
+	(rowSelected)="onSelectHero($event)"
+></challenger-table>
