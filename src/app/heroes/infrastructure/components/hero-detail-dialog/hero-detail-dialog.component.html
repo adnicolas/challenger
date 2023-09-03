@@ -2,7 +2,7 @@
 	<div mat-dialog-content>
 		<ng-container *ngFor="let item of data | keyvalue; let colIndex = index">
 			<div class="hero-detail-dialog-data-row">
-				<div>{{ item.key }}</div>
+				<div>{{ item.key | formatColumnName }}:</div>
 				<div>{{ item.value }}</div>
 			</div>
 		</ng-container>

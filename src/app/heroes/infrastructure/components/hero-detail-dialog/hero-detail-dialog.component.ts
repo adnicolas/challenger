@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
+import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
 
 @Component({
 	selector: 'challenger-hero-detail-dialog',
@@ -14,7 +15,8 @@ import { ButtonComponent } from '@shared/infrastructure/components/button/button
 	imports: [
 		CommonModule,
 		MatDialogModule,
-		ButtonComponent
+		ButtonComponent,
+		FormatColumnName
 	],
 	templateUrl: './hero-detail-dialog.component.html',
 	styleUrls: ['./hero-detail-dialog.component.scss']

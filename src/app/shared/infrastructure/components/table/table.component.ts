@@ -13,6 +13,7 @@ import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
 
 @Component({
 	selector: 'challenger-table',
@@ -21,7 +22,8 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 		CommonModule,
 		MatTableModule,
 		MatSortModule,
-		MatPaginatorModule
+		MatPaginatorModule,
+		FormatColumnName
 	],
 	templateUrl: './table.component.html',
 	styleUrls: ['./table.component.scss'],

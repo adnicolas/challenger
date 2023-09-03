@@ -9,7 +9,7 @@
 		matColumnDef="{{ displayedColumn }}"
 	>
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>
-			{{ displayedColumn }}
+			{{ displayedColumn | formatColumnName }}
 		</th>
 		<td mat-cell *matCellDef="let element">{{ element[displayedColumn] }}</td>
 	</ng-container>
