@@ -91,7 +91,11 @@ export class AppComponent implements OnInit {
 		new SetTableChartsData(this.stateService, this.chartsDataService).run(
 			heroes,
 		);
-		new SetChipsOptions(this.chipsService, this.domainHeroService).run(heroes);
+		new SetChipsOptions(
+			this.chipsService,
+			this.domainHeroService,
+			this.stateService,
+		).run(heroes);
 	}
 	public onCreateHero(): void {
 		new OpenHeroCreation(

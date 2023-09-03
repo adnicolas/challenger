@@ -40,13 +40,9 @@ be on the table after refresh)
 
 ## Posibles mejoras
 
-* [ ] Actualizar gráficos cuando se filtra la tabla
 * [ ] Añadir algún test unitario con Jest
 * [ ] Añadir algún test unitario con Cypress
-* [ ] Actualizar listado de options para chips cuando se crea un nuevo héroe (DomainEvent?)
-* [ ] Aprovechar evento de dominio de creación para cerrar CreationDialog
 * [ ] Probar solución basada en Angular signals
-* [ ] Hacer un CreationDialogComponent reutilizable
 
 ## Development server
 
