@@ -75,7 +75,7 @@ export class BarChartComponent implements OnInit {
 			.attr('x', (d: any) => x(d.xProperty))
 			.attr('y', (d: any) => y(d.yProperty))
 			.attr('width', x.bandwidth())
-			.attr('height', (d: any) => this.height - y(d.yProperty))
+			.attr('height', (d: any) => this.height - y(d[this.yProperty]))
 			.attr('fill', '#d04a35');
 	}
 }
