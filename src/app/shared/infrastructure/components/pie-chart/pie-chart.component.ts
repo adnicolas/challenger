@@ -7,12 +7,8 @@ import {
 	OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-	select as d3select,
-	scaleOrdinal as d3scaleOrdinal,
-	pie as d3pie,
-	arc as d3arc
-} from 'd3';
+import { select, scaleOrdinal, pie, arc } from 'd3';
+
 @Component({
 	selector: 'challenger-pie-chart',
 	standalone: true,
@@ -45,7 +41,7 @@ export class PieChartComponent implements OnInit {
 		this.drawChart();
 	}
 	private createSvg(): void {
-		this.svg = d3select('figure#pie')
+		this.svg = select('figure#pie')
 			.append('svg')
 			.attr('width', this.width)
 			.attr('height', this.height)
@@ -54,7 +50,7 @@ export class PieChartComponent implements OnInit {
 	}
 
 	private createColors(): void {
-		this.colors = d3scaleOrdinal()
+		this.colors = scaleOrdinal()
 			.domain(this.data.map((d: any) => d[this.scaleProperty].toString()))
 			.range([
 				'#c7d3ec',
@@ -66,25 +62,25 @@ export class PieChartComponent implements OnInit {
 	}
 
 	private drawChart(): void {
-		const pie = d3pie<any>().value((d: any) => Number(d[this.scaleProperty]));
+		const d3pie = pie<any>().value((d: any) => Number(d[this.scaleProperty]));
 
 		this.svg
 			.selectAll('pieces')
-			.data(pie(this.data))
+			.data(d3pie(this.data))
 			.enter()
 			.append('path')
-			.attr('d', d3arc().innerRadius(0)
+			.attr('d', arc().innerRadius(0)
 				.outerRadius(this.radius))
 			.attr('fill', (d: any, i: any) => this.colors(i))
 			.attr('stroke', '#121926')
 			.style('stroke-width', '1px');
 
-		const labelLocation = d3arc().innerRadius(100)
+		const labelLocation = arc().innerRadius(100)
 			.outerRadius(this.radius);
 
 		this.svg
 			.selectAll('pieces')
-			.data(pie(this.data))
+			.data(d3pie(this.data))
 			.enter()
 			.append('text')
 			.text((d: any) => d.data[this.textProperty])
