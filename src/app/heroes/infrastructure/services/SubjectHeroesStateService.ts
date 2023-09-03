@@ -4,9 +4,7 @@ import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class SubjectHeroesStateService implements HeroesStateService {
 	private heroesSrc = new BehaviorSubject<MarvelHero[]>([]);
 	private mutableHeroesSrc = new BehaviorSubject<MarvelHero[]>([]);

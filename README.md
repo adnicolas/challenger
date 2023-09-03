@@ -40,15 +40,15 @@ be on the table after refresh)
 
 ## Posibles mejoras
 
+* [ ] Actualizar gráficos cuando se filtra la tabla
 * [ ] Revisar necesidad de mantener heroes$ y mutableHeroes$ en estado
-* [ ] Investigar por qué con inject() funciona pero con providers no algunos componentes y servicios (importante para inversión de dependencias)
 * [ ] Refactorizar HeroesStateService y SubjectHeroesStateService, tiene demasiadas responsabilidades
-* [ ] Hacer un CreationDialogComponent reutilizable
+* [ ] Añadir algún test unitario con Jest
+* [ ] Añadir algún test unitario con Cypress
 * [ ] Actualizar listado de options para chips cuando se crea un nuevo héroe (DomainEvent?)
 * [ ] Aprovechar evento de dominio de creación para cerrar CreationDialog
 * [ ] Probar solución basada en Angular signals
-* [ ] Añadir algún test unitario con Jest
-* [ ] Añadir algún test unitario con Cypress
+* [ ] Hacer un CreationDialogComponent reutilizable
 
 ## Development server
 

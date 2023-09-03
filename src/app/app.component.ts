@@ -1,9 +1,4 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	OnInit,
-	inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { GetHeroes } from '@heroes/application/GetHeroes';
 import { HeroesDataService } from '@heroes/domain/HeroesDataService';
 import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
@@ -30,6 +25,7 @@ import { ResetHeroes } from '@heroes/application/ResetHeroes';
 import { CommonModule } from '@angular/common';
 import { TableColumn } from '@shared/domain/TableColumn.interface';
 import { ChartData } from '@shared/domain/ChartData.interface';
+import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 
 @Component({
 	selector: 'challenger-root',
@@ -44,6 +40,7 @@ import { ChartData } from '@shared/domain/ChartData.interface';
 	templateUrl: './app.component.html',
 	providers: [
 		{ provide: HeroesDataService, useClass: LocalHeroesDataService },
+		{ provide: HeroesStateService, useClass: SubjectHeroesStateService },
 		{
 			provide: HeroCreationDialogService,
 			useClass: AngularMaterialHeroCreationDialogService
@@ -57,7 +54,6 @@ import { ChartData } from '@shared/domain/ChartData.interface';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-	private stateService = inject(SubjectHeroesStateService);
 	public mutableHeroes$: Observable<MarvelHero[]> =
 		this.stateService.mutableHeroes$;
 	public tableColumns: TableColumn[] = [];
@@ -66,6 +62,7 @@ export class AppComponent implements OnInit {
 	// eslint-disable-next-line max-params
 	constructor(
 		private dataService: HeroesDataService,
+		private stateService: HeroesStateService,
 		private domainHeroService: DomainHeroService,
 		private heroCreationDialogService: HeroCreationDialogService,
 		private heroDetailDialogService: HeroDetailDialogService,
