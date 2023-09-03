@@ -28,6 +28,8 @@ import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { ResetHeroes } from '@heroes/application/ResetHeroes';
 import { CommonModule } from '@angular/common';
+import { TableColumn } from '@shared/domain/TableColumn.interface';
+import { ChartData } from '@shared/domain/ChartData.interface';
 
 @Component({
 	selector: 'challenger-root',
@@ -58,7 +60,7 @@ export class AppComponent implements OnInit {
 	private stateService = inject(SubjectHeroesStateService);
 	public mutableHeroes$: Observable<MarvelHero[]> =
 		this.stateService.mutableHeroes$;
-	public tableColumns: string[] = [];
+	public tableColumns: TableColumn[] = [];
 	public chipOptions: string[] = [];
 	private heroes: MarvelHero[] = [];
 	// eslint-disable-next-line max-params
@@ -103,7 +105,32 @@ export class AppComponent implements OnInit {
 			this.domainHeroService.getHeroName(hero),
 		);
 	}
-	private getTableColumns(heroes: MarvelHero[]): string[] {
-		return Object.keys(heroes[0]);
+	private getTableColumns(heroes: MarvelHero[]): TableColumn[] {
+		return Object.keys(heroes[0]).map((name: string) => {
+			const groupedData = this.groupBy(heroes, name);
+			const chartData: ChartData[] = [];
+			for (const [key, value] of Object.entries(groupedData)) {
+				chartData.push({
+					name: key,
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					value: (value as any[]).length
+				});
+			}
+			return {
+				name,
+				chartData
+			};
+		});
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	private groupBy(data: MarvelHero[], key: string): any {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return data.reduce((storage: any, item: MarvelHero) => {
+			const group = item[key as keyof MarvelHero];
+			storage[group] = storage[group] || [];
+			storage[group].push(item);
+			return storage;
+		}, {});
 	}
 }

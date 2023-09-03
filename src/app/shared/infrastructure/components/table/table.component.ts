@@ -16,6 +16,7 @@ import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { TableColumn } from '@shared/domain/TableColumn.interface';
 
 @Component({
 	selector: 'challenger-table',
@@ -39,7 +40,16 @@ export class TableComponent implements AfterViewInit {
 			this.dataSource.data = data;
 		});
 	}
-	@Input() displayedColumns: string[] = [];
+	private _displayedColumns: TableColumn[] = [];
+	get displayedColumns(): TableColumn[] {
+		return this._displayedColumns;
+	}
+	@Input() set displayedColumns(columns: TableColumn[]) {
+		this._displayedColumns = columns;
+		this.displayedColumnsNames = columns.map(
+			(column: TableColumn) => column.name,
+		);
+	}
 	@Input() hidePaginator: boolean = false;
 	@Input() includeHeaderCharts: boolean = true;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
@@ -47,6 +57,7 @@ export class TableComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	public dataSource = new MatTableDataSource();
+	public displayedColumnsNames: string[] = [];
 
 	ngAfterViewInit(): void {
 		this.dataSource.paginator = this.paginator;
@@ -63,6 +74,8 @@ export class TableComponent implements AfterViewInit {
 	}
 
 	public getChartColumnsDefs(): string[] {
-		return this.displayedColumns.map((name: string) => `${name}-chart`);
+		return this.displayedColumns.map(
+			(column: TableColumn) => `${column.name}-chart`,
+		);
 	}
 }

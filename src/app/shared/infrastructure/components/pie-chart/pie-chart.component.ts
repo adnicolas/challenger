@@ -13,7 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent {
-	public view: [number, number] = [100, 100];
+	@Input() view: [number, number] = [100, 100];
 	@Input() data: ChartData[] = [
 		{
 			name: 'Germany',

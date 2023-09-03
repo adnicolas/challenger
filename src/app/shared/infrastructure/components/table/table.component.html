@@ -6,31 +6,41 @@
 >
 	<ng-container
 		*ngFor="let displayedColumn of displayedColumns; let colIndex = index"
-		matColumnDef="{{ displayedColumn }}"
+		matColumnDef="{{ displayedColumn.name }}"
 	>
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>
-			{{ displayedColumn | formatColumnName }}
+			{{ displayedColumn.name | formatColumnName }}
 		</th>
-		<td mat-cell *matCellDef="let element">{{ element[displayedColumn] }}</td>
+		<td mat-cell *matCellDef="let element">
+			{{ element[displayedColumn.name] }}
+		</td>
 	</ng-container>
 
 	<ng-container *ngIf="includeHeaderCharts">
 		<ng-container
 			*ngFor="let displayedColumn of displayedColumns"
-			matColumnDef="{{ displayedColumn }}-chart"
+			matColumnDef="{{ displayedColumn.name }}-chart"
 		>
 			<th mat-header-cell *matHeaderCellDef>
-				<challenger-bar-chart></challenger-bar-chart>
+				<challenger-bar-chart
+					*ngIf="displayedColumn.chartData.length > 5; else pieChartTemplate"
+					[data]="displayedColumn.chartData"
+				></challenger-bar-chart>
+				<ng-template #pieChartTemplate>
+					<challenger-pie-chart
+						[data]="displayedColumn.chartData"
+					></challenger-pie-chart>
+				</ng-template>
 			</th>
 		</ng-container>
 	</ng-container>
 
-	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-header-row *matHeaderRowDef="displayedColumnsNames"></tr>
 	<tr mat-header-row *matHeaderRowDef="getChartColumnsDefs()"></tr>
 	¡
 	<tr
 		mat-row
-		*matRowDef="let row; columns: displayedColumns"
+		*matRowDef="let row; columns: displayedColumnsNames"
 		(click)="selectRow(row)"
 		style="cursor: pointer"
 	></tr>

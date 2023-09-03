@@ -13,7 +13,7 @@ import { ChartData } from '@shared/domain/ChartData.interface';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarChartComponent {
-	public view: [number, number] = [100, 100];
+	@Input() view: [number, number] = [100, 100];
 	@Input() data: ChartData[] = [
 		{
 			name: 'Germany',
