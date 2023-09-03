@@ -12,8 +12,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
+import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
+import { BarChartComponent } from '../bar-chart/bar-chart.component';
 
 @Component({
 	selector: 'challenger-table',
@@ -22,6 +24,8 @@ import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.
 		CommonModule,
 		MatTableModule,
 		MatSortModule,
+		PieChartComponent,
+		BarChartComponent,
 		MatPaginatorModule,
 		FormatColumnName
 	],
@@ -37,6 +41,7 @@ export class TableComponent implements AfterViewInit {
 	}
 	@Input() displayedColumns: string[] = [];
 	@Input() hidePaginator: boolean = false;
+	@Input() includeHeaderCharts: boolean = true;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
 	@Output() rowSelected: EventEmitter<unknown> = new EventEmitter<unknown>();
 
@@ -55,5 +60,9 @@ export class TableComponent implements AfterViewInit {
 
 	public selectRow(row: unknown): void {
 		this.rowSelected.emit(row);
+	}
+
+	public getChartColumnsDefs(): string[] {
+		return this.displayedColumns.map((name: string) => `${name}-chart`);
 	}
 }
