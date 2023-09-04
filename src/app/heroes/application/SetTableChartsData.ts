@@ -3,15 +3,18 @@ import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { ChartData } from '@shared/domain/ChartData.interface';
 import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
+import { Observable } from 'rxjs';
 
 export class SetTableChartsData {
 	constructor(
 		private readonly stateService: HeroesStateService,
 		private readonly chartsDataService: ChartsDataService,
 	) {
-		this.stateService.filteredHeroes$.subscribe((heroes: MarvelHero[]) => {
-			this.run(heroes);
-		});
+		(this.stateService.filteredHeroes$ as Observable<MarvelHero[]>).subscribe(
+			(heroes: MarvelHero[]) => {
+				this.run(heroes);
+			},
+		);
 	}
 	public async run(heroes: MarvelHero[]): Promise<void> {
 		const chartsData: ChartData = this.getTableColumnsNamesFromHeroes(heroes);

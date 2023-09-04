@@ -1,14 +1,17 @@
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
+import { Observable } from 'rxjs';
 
 export class SortHeroes {
 	private heroes: MarvelHero[] = [];
 	private sortOptions: SortOptions | null = null;
 	constructor(private readonly stateService: HeroesStateService) {
-		this.stateService.filteredHeroes$.subscribe((heroes: MarvelHero[]) => {
-			this.heroes = heroes;
-		});
+		(this.stateService.filteredHeroes$ as Observable<MarvelHero[]>).subscribe(
+			(heroes: MarvelHero[]) => {
+				this.heroes = heroes;
+			},
+		);
 	}
 	public run(options?: SortOptions): void {
 		const sortOptions: SortOptions | null = options ?? this.sortOptions;

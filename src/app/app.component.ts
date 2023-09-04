@@ -66,13 +66,18 @@ import { Observable } from 'rxjs';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-	public filteredHeroes$: Observable<MarvelHero[]> =
-		this.stateService.filteredHeroes$;
-	public tableColumnsNames$: Observable<string[]> =
-		this.tableService.tableColumnsNames$;
-	public chipOptions$: Observable<string[]> = this.chipsService.options$;
-	public chartsData$: Observable<ChartData | null> =
-		this.chartsDataService.chartsData$;
+	public filteredHeroes$: Observable<MarvelHero[]> = this.stateService
+		.filteredHeroes$ as Observable<MarvelHero[]>;
+
+	public tableColumnsNames$: Observable<string[]> = this.tableService
+		.tableColumnsNames$ as Observable<string[]>;
+
+	public chipOptions$: Observable<string[]> = this.chipsService
+		.options$ as Observable<string[]>;
+
+	public chartsData$: Observable<ChartData | null> = this.chartsDataService
+		.chartsData$ as Observable<ChartData | null>;
+
 	public CHARTS_THRESHOLD = chartsThreshold;
 	// eslint-disable-next-line max-params
 	constructor(
