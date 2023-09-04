@@ -36,15 +36,14 @@
 		</ng-container>
 	</ng-container>
 
-	<tr mat-header-row *matHeaderRowDef="getColumnsNames(displayedColumns)"></tr>
+	<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 	<tr
 		mat-header-row
-		*matHeaderRowDef="getChartColumnsDefs(displayedColumns)"
+		*matHeaderRowDef="getChartColumnsDefs(displayedColumns); sticky: true"
 	></tr>
-	¡
 	<tr
 		mat-row
-		*matRowDef="let row; columns: getColumnsNames(displayedColumns)"
+		*matRowDef="let row; columns: displayedColumns"
 		(click)="selectRow(row)"
 		style="cursor: pointer"
 	></tr>

@@ -77,8 +77,4 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 	public getChartColumnsDefs(displayedColumns: string[]): string[] {
 		return displayedColumns.map((column: string) => `${column}-chart`);
 	}
-
-	public getColumnsNames(displayedColumns: string[]): string[] {
-		return displayedColumns.map((column: string) => column);
-	}
 }
