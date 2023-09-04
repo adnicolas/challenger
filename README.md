@@ -42,7 +42,6 @@ be on the table after refresh)
 
 * [ ] Añadir algún test unitario con Jest
 * [ ] Añadir algún test unitario con Cypress
-* [ ] Probar solución basada en Angular signals
 
 ## Development server
 
