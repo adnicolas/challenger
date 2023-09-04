@@ -40,7 +40,7 @@ import { Observable, Subscription, of } from 'rxjs';
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 	@Input() data$: Observable<unknown[]> = of([]);
 	@Input() displayedColumns$!: Signal<string[]>;
-	@Input() chartsData$: Observable<ChartData[]> = of([]);
+	@Input() chartsData$!: Signal<ChartData[]>;
 	@Input() chartsThreshold!: number;
 	@Input() hidePaginator: boolean = false;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();

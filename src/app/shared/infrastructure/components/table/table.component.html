@@ -18,7 +18,7 @@
 		</td>
 	</ng-container>
 
-	<ng-container *ngIf="chartsData$ | async as chartsData">
+	<ng-container *ngIf="chartsData$() as chartsData">
 		<ng-container
 			*ngFor="let displayedColumn of displayedColumns"
 			matColumnDef="{{ displayedColumn }}-chart"

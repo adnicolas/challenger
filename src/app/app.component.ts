@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -5,18 +6,9 @@ import {
 	Signal
 } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { GetHeroes } from '@heroes/application/GetHeroes';
 import { OpenHeroCreation } from '@heroes/application/OpenHeroCreation';
-import { HeroCreationDialogService } from '@heroes/domain/HeroCreationDialogService';
-import { HeroDetailDialogService } from '@heroes/domain/HeroDetailDialogService';
-import { HeroesDataService } from '@heroes/domain/HeroesDataService';
-import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
-import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
-import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
-import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
-import { TableComponent } from '@shared/infrastructure/components/table/table.component';
-import { CommonModule } from '@angular/common';
-import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
 import { ResetFilter } from '@heroes/application/ResetFilter';
 import { SetChipsOptions } from '@heroes/application/SetChipsOptions';
@@ -27,20 +19,29 @@ import { SortHeroes } from '@heroes/application/SortHeroes';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
 import { chartsThreshold } from '@heroes/domain/ChartsThreshold';
 import { ChipsService } from '@heroes/domain/ChipsService';
+import { HeroCreationDialogService } from '@heroes/domain/HeroCreationDialogService';
+import { HeroDetailDialogService } from '@heroes/domain/HeroDetailDialogService';
+import { HeroesDataService } from '@heroes/domain/HeroesDataService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { TableService } from '@heroes/domain/TableService';
+import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
+import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
+import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
+import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
+import { TableComponent } from '@shared/infrastructure/components/table/table.component';
 // eslint-disable-next-line max-len
 import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroCreationDialogService';
 // eslint-disable-next-line max-len
 import { AngularMaterialHeroDetailDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroDetailDialogService';
-import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
+//import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
 import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
 //import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
+import { SignalChartsDataService } from '@heroes/infrastructure/services/SignalChartsDataService';
+import { SignalTableService } from '@heroes/infrastructure/services/SignalTableService';
 import { ChartData } from '@shared/domain/ChartData.interface';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { Observable } from 'rxjs';
-import { SignalTableService } from '@heroes/infrastructure/services/SignalTableService';
 
 @Component({
 	selector: 'challenger-root',
@@ -57,7 +58,7 @@ import { SignalTableService } from '@heroes/infrastructure/services/SignalTableS
 		{ provide: HeroesDataService, useClass: LocalHeroesDataService },
 		{ provide: HeroesStateService, useClass: RxJsHeroesStateService },
 		{ provide: TableService, useClass: SignalTableService },
-		{ provide: ChartsDataService, useClass: RxJsChartsDataService },
+		{ provide: ChartsDataService, useClass: SignalChartsDataService },
 		{ provide: ChipsService, useClass: RxJsChipsService },
 		{
 			provide: HeroCreationDialogService,
@@ -81,8 +82,8 @@ export class AppComponent implements OnInit {
 	public chipOptions$: Observable<string[]> = this.chipsService
 		.options$ as Observable<string[]>;
 
-	public chartsData$: Observable<ChartData | null> = this.chartsDataService
-		.chartsData$ as Observable<ChartData | null>;
+	public chartsData$: Signal<ChartData | null> = this.chartsDataService
+		.chartsData$ as Signal<ChartData | null>;
 
 	public CHARTS_THRESHOLD = chartsThreshold;
 	// eslint-disable-next-line max-params
