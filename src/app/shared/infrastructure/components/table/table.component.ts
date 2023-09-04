@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -7,16 +8,15 @@ import {
 	Output,
 	ViewChild
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule, Sort } from '@angular/material/sort';
-import { Observable, of } from 'rxjs';
-import { SortOptions } from '@shared/domain/SortOptions.interface';
-import { PieChartComponent } from '@shared/infrastructure/components/pie-chart/pie-chart.component';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
-import { BarChartComponent } from '@shared/infrastructure/components/bar-chart/bar-chart.component';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ChartData } from '@shared/domain/ChartData.interface';
+import { SortOptions } from '@shared/domain/SortOptions.interface';
+import { BarChartComponent } from '@shared/infrastructure/components/bar-chart/bar-chart.component';
+import { PieChartComponent } from '@shared/infrastructure/components/pie-chart/pie-chart.component';
+import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
+import { Observable, of } from 'rxjs';
 
 @Component({
 	selector: 'challenger-table',

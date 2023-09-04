@@ -1,22 +1,22 @@
-import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
-import { MatInputModule } from '@angular/material/input';
-import { CreateHero } from '@heroes/application/CreateHero';
-import { MatSelectModule } from '@angular/material/select';
+import { Component, Inject } from '@angular/core';
 import {
 	FormControl,
-	Validators,
+	FormGroup,
 	FormsModule,
 	ReactiveFormsModule,
-	FormGroup
+	Validators
 } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { CreateHero } from '@heroes/application/CreateHero';
 import { Gender } from '@heroes/domain/Gender.enum';
+import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
-import { HeroesStateService } from '@heroes/domain/HeroesStateService';
+import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
 
 @Component({
 	selector: 'challenger-hero-creation-dialog',

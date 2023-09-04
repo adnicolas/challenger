@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import {
 	MAT_DIALOG_DATA,
-	MatDialogRef,
-	MatDialogModule
+	MatDialogModule,
+	MatDialogRef
 } from '@angular/material/dialog';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';

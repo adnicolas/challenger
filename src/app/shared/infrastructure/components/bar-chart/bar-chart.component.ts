@@ -1,8 +1,8 @@
 /* eslint-disable no-magic-numbers */
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
 	selector: 'challenger-bar-chart',

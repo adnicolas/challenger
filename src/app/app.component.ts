@@ -1,41 +1,41 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { GetHeroes } from '@heroes/application/GetHeroes';
-import { HeroesDataService } from '@heroes/domain/HeroesDataService';
-import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
-import { TableComponent } from '@shared/infrastructure/components/table/table.component';
-import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
-import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
+import { GetHeroes } from '@heroes/application/GetHeroes';
 import { OpenHeroCreation } from '@heroes/application/OpenHeroCreation';
 import { HeroCreationDialogService } from '@heroes/domain/HeroCreationDialogService';
-// eslint-disable-next-line max-len
-import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroCreationDialogService';
+import { HeroesDataService } from '@heroes/domain/HeroesDataService';
+import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
+import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
+import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
+import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
+import { TableComponent } from '@shared/infrastructure/components/table/table.component';
 import { HeroDetailDialogService } from '@heroes/domain/HeroDetailDialogService';
 // eslint-disable-next-line max-len
-import { AngularMaterialHeroDetailDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroDetailDialogService';
-import { Observable } from 'rxjs';
-import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
-import { SortOptions } from '@shared/domain/SortOptions.interface';
-import { SortHeroes } from '@heroes/application/SortHeroes';
-import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
-import { FilterHeroes } from '@heroes/application/FilterHeroes';
-import { ResetFilter } from '@heroes/application/ResetFilter';
+import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroCreationDialogService';
 import { CommonModule } from '@angular/common';
-import { HeroesStateService } from '@heroes/domain/HeroesStateService';
-import { TableService } from '@heroes/domain/TableService';
-import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
-import { ChipsService } from '@heroes/domain/ChipsService';
-import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
-import { SetHeroes } from '@heroes/application/SetHeroes';
-import { SetTableColumnsNames } from '@heroes/application/SetTableColumnsNames';
+import { FilterHeroes } from '@heroes/application/FilterHeroes';
+import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
+import { ResetFilter } from '@heroes/application/ResetFilter';
 import { SetChipsOptions } from '@heroes/application/SetChipsOptions';
-import { DomainHeroService } from '@heroes/domain/DomainHeroService';
+import { SetHeroes } from '@heroes/application/SetHeroes';
 import { SetTableChartsData } from '@heroes/application/SetTableChartsData';
+import { SetTableColumnsNames } from '@heroes/application/SetTableColumnsNames';
+import { SortHeroes } from '@heroes/application/SortHeroes';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
-import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
-import { ChartData } from '@shared/domain/ChartData.interface';
 import { chartsThreshold } from '@heroes/domain/ChartsThreshold';
+import { ChipsService } from '@heroes/domain/ChipsService';
+import { DomainHeroService } from '@heroes/domain/DomainHeroService';
+import { HeroesStateService } from '@heroes/domain/HeroesStateService';
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
+import { TableService } from '@heroes/domain/TableService';
+// eslint-disable-next-line max-len
+import { AngularMaterialHeroDetailDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroDetailDialogService';
+import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
+import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
+import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
+import { ChartData } from '@shared/domain/ChartData.interface';
+import { SortOptions } from '@shared/domain/SortOptions.interface';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'challenger-root',

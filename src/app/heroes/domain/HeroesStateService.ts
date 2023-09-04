@@ -1,5 +1,5 @@
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { Observable } from 'rxjs';
-import { MarvelHero } from './MarvelHero.interface';
 
 export abstract class HeroesStateService {
 	public abstract filteredHeroes$: Observable<MarvelHero[]>;

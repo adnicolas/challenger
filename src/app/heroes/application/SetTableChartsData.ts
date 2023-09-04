@@ -1,8 +1,8 @@
-import { ChartData } from '@shared/domain/ChartData.interface';
-import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
+import { ChartData } from '@shared/domain/ChartData.interface';
+import { ChartDataValue } from '@shared/domain/ChartDataValue.interface';
 
 export class SetTableChartsData {
 	constructor(

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MarvelHero } from './MarvelHero.interface';
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 
 @Injectable({
 	providedIn: 'root'

@@ -1,7 +1,7 @@
-import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { ChipsService } from '@heroes/domain/ChipsService';
 import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 
 export class SetChipsOptions {
 	constructor(

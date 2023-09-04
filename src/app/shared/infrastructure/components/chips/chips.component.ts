@@ -1,3 +1,5 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { CommonModule } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -7,16 +9,14 @@ import {
 	Output,
 	ViewChild
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	MatAutocompleteModule,
 	MatAutocompleteSelectedEvent
 } from '@angular/material/autocomplete';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
-import { HeroesStateService } from '@heroes/domain/HeroesStateService';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { DomainHeroService } from '@heroes/domain/DomainHeroService';
+import { HeroesStateService } from '@heroes/domain/HeroesStateService';
+import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class RxJsHeroesStateService implements HeroesStateService {

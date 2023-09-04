@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChartData } from '@shared/domain/ChartData.interface';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
+import { ChartData } from '@shared/domain/ChartData.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
