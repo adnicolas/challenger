@@ -2,6 +2,7 @@ input {
 	border: solid 2px black;
 	border-radius: 5px;
 	padding: 5px;
+	max-width: 150px;
 	&::placeholder {
 		font-weight: bold;
 		opacity: 0.5;

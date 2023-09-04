@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { AddChipOption } from '@heroes/application/AddChipOption';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ChipsService } from '@heroes/domain/ChipsService';
 
 @Injectable()
 export class RxJsHeroesStateService implements HeroesStateService {
@@ -9,6 +11,8 @@ export class RxJsHeroesStateService implements HeroesStateService {
 	private filteredHeroesSrc = new BehaviorSubject<MarvelHero[]>([]);
 	public filteredHeroes$: Observable<MarvelHero[]> =
 		this.filteredHeroesSrc.asObservable();
+
+	constructor(private chipsService: ChipsService) {}
 
 	public setHeroes(heroes: MarvelHero[]): void {
 		this.heroes = heroes;
@@ -34,5 +38,6 @@ export class RxJsHeroesStateService implements HeroesStateService {
 		const heroes: MarvelHero[] = this.filteredHeroesSrc.getValue();
 		heroes.unshift(hero);
 		this.filteredHeroesSrc.next(heroes);
+		new AddChipOption(this.chipsService).run(hero);
 	}
 }

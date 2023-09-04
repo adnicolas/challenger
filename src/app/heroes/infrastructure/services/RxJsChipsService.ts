@@ -11,4 +11,9 @@ export class RxJsChipsService implements ChipsService {
 	public setOptions(options: string[]): void {
 		this.optionsSrc.next(options);
 	}
+	public addOption(option: string): void {
+		const options: string[] = this.optionsSrc.getValue();
+		options.unshift(option);
+		this.optionsSrc.next(options);
+	}
 }
