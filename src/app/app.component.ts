@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	Signal
+} from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GetHeroes } from '@heroes/application/GetHeroes';
 import { OpenHeroCreation } from '@heroes/application/OpenHeroCreation';
@@ -31,10 +36,11 @@ import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure
 import { AngularMaterialHeroDetailDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroDetailDialogService';
 import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
 import { RxJsChipsService } from '@heroes/infrastructure/services/RxJsChipsService';
-import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
+//import { RxJsTableService } from '@heroes/infrastructure/services/RxJsTableService';
 import { ChartData } from '@shared/domain/ChartData.interface';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { Observable } from 'rxjs';
+import { SignalTableService } from '@heroes/infrastructure/services/SignalTableService';
 
 @Component({
 	selector: 'challenger-root',
@@ -50,7 +56,7 @@ import { Observable } from 'rxjs';
 	providers: [
 		{ provide: HeroesDataService, useClass: LocalHeroesDataService },
 		{ provide: HeroesStateService, useClass: RxJsHeroesStateService },
-		{ provide: TableService, useClass: RxJsTableService },
+		{ provide: TableService, useClass: SignalTableService },
 		{ provide: ChartsDataService, useClass: RxJsChartsDataService },
 		{ provide: ChipsService, useClass: RxJsChipsService },
 		{
@@ -69,8 +75,8 @@ export class AppComponent implements OnInit {
 	public filteredHeroes$: Observable<MarvelHero[]> = this.stateService
 		.filteredHeroes$ as Observable<MarvelHero[]>;
 
-	public tableColumnsNames$: Observable<string[]> = this.tableService
-		.tableColumnsNames$ as Observable<string[]>;
+	public tableColumnsNames$: Signal<string[]> = this.tableService
+		.tableColumnsNames$ as Signal<string[]>;
 
 	public chipOptions$: Observable<string[]> = this.chipsService
 		.options$ as Observable<string[]>;

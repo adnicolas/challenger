@@ -8,6 +8,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
+	Signal,
 	ViewChild
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -38,7 +39,7 @@ import { Observable, Subscription, of } from 'rxjs';
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 	@Input() data$: Observable<unknown[]> = of([]);
-	@Input() displayedColumns$: Observable<string[]> = of([]);
+	@Input() displayedColumns$!: Signal<string[]>;
 	@Input() chartsData$: Observable<ChartData[]> = of([]);
 	@Input() chartsThreshold!: number;
 	@Input() hidePaginator: boolean = false;
