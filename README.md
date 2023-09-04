@@ -43,6 +43,10 @@ be on the table after refresh)
 * [ ] Añadir algún test unitario con Jest
 * [ ] Añadir algún test unitario con Cypress
 
+## A tener en cuenta
+
+* No es arquitectura hexagonal (ports & adapters) pura ya que los contratos de los servicios en la capa dominio tienen RxJs por dependencia (Observables). It should be possible to use JS promises instead of RxJs observables, but we would have to write a lot of boilerplate code in our classes.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
