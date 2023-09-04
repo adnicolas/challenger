@@ -6,6 +6,8 @@ import {
 	ElementRef,
 	EventEmitter,
 	Input,
+	OnDestroy,
+	OnInit,
 	Output,
 	ViewChild
 } from '@angular/core';
@@ -17,7 +19,7 @@ import {
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -36,15 +38,25 @@ import { map, startWith } from 'rxjs/operators';
 	styleUrls: ['./chips.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipsComponent {
+export class ChipsComponent implements OnInit, OnDestroy {
 	@Input() placeholder!: string;
-	private _allOptions: string[] = [];
-	get allOptions(): string[] {
-		return this._allOptions;
-	}
-	@Input() set allOptions$(obs: Observable<string[]>) {
-		obs.subscribe((options: string[]) => {
-			this._allOptions = options;
+	@Input() allOptions$: Observable<string[]> = of([]);
+
+	@Output() updated: EventEmitter<string[]> = new EventEmitter<string[]>();
+	@Output() resetted: EventEmitter<void> = new EventEmitter<void>();
+
+	public separatorKeysCodes: number[] = [ENTER, COMMA];
+	public optionCtrl = new FormControl('');
+	public filteredOptions: Observable<string[]> = of([]);
+	public allOptions: string[] = [];
+	public options: string[] = [];
+	private subscription!: Subscription;
+
+	@ViewChild('optionInput') optionInput!: ElementRef<HTMLInputElement>;
+
+	ngOnInit(): void {
+		this.subscription = this.allOptions$.subscribe((options: string[]) => {
+			this.allOptions = options;
 			this.filteredOptions = this.optionCtrl.valueChanges.pipe(
 				startWith(null),
 				map((option: string | null) =>
@@ -54,15 +66,9 @@ export class ChipsComponent {
 		});
 	}
 
-	@Output() updated: EventEmitter<string[]> = new EventEmitter<string[]>();
-	@Output() resetted: EventEmitter<void> = new EventEmitter<void>();
-
-	public separatorKeysCodes: number[] = [ENTER, COMMA];
-	public optionCtrl = new FormControl('');
-	public filteredOptions: Observable<string[]> = of([]);
-	public options: string[] = [];
-
-	@ViewChild('optionInput') optionInput!: ElementRef<HTMLInputElement>;
+	ngOnDestroy(): void {
+		this.subscription?.unsubscribe();
+	}
 
 	public add(event: MatChipInputEvent): void {
 		const value = (event.value || '').trim();

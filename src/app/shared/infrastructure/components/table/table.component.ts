@@ -5,6 +5,8 @@ import {
 	Component,
 	EventEmitter,
 	Input,
+	OnDestroy,
+	OnInit,
 	Output,
 	ViewChild
 } from '@angular/core';
@@ -16,7 +18,7 @@ import { SortOptions } from '@shared/domain/SortOptions.interface';
 import { BarChartComponent } from '@shared/infrastructure/components/bar-chart/bar-chart.component';
 import { PieChartComponent } from '@shared/infrastructure/components/pie-chart/pie-chart.component';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 
 @Component({
 	selector: 'challenger-table',
@@ -34,12 +36,8 @@ import { Observable, of } from 'rxjs';
 	styleUrls: ['./table.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements AfterViewInit {
-	@Input() set data$(obs: Observable<unknown[]>) {
-		obs.subscribe((data) => {
-			this.dataSource.data = data;
-		});
-	}
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+	@Input() data$: Observable<unknown[]> = of([]);
 	@Input() displayedColumns$: Observable<string[]> = of([]);
 	@Input() chartsData$: Observable<ChartData[]> = of([]);
 	@Input() chartsThreshold!: number;
@@ -49,10 +47,22 @@ export class TableComponent implements AfterViewInit {
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 	public dataSource = new MatTableDataSource();
+	private subscription!: Subscription;
+
+	ngOnInit(): void {
+		this.subscription = this.data$.subscribe((data) => {
+			this.dataSource.data = data;
+		});
+	}
 
 	ngAfterViewInit(): void {
 		this.dataSource.paginator = this.paginator;
 	}
+
+	ngOnDestroy(): void {
+		this.subscription?.unsubscribe();
+	}
+
 	public sortData(sort: Sort): void {
 		this.sorted.emit({
 			property: sort.active,
