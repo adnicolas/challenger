@@ -3,15 +3,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { GetHeroes } from '@heroes/application/GetHeroes';
 import { OpenHeroCreation } from '@heroes/application/OpenHeroCreation';
 import { HeroCreationDialogService } from '@heroes/domain/HeroCreationDialogService';
+import { HeroDetailDialogService } from '@heroes/domain/HeroDetailDialogService';
 import { HeroesDataService } from '@heroes/domain/HeroesDataService';
 import { LocalHeroesDataService } from '@heroes/infrastructure/services/LocalHeroesDataService';
 import { RxJsHeroesStateService } from '@heroes/infrastructure/services/RxJsHeroesStateService';
 import { ButtonComponent } from '@shared/infrastructure/components/button/button.component';
 import { ChipsComponent } from '@shared/infrastructure/components/chips/chips.component';
 import { TableComponent } from '@shared/infrastructure/components/table/table.component';
-import { HeroDetailDialogService } from '@heroes/domain/HeroDetailDialogService';
-// eslint-disable-next-line max-len
-import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroCreationDialogService';
 import { CommonModule } from '@angular/common';
 import { FilterHeroes } from '@heroes/application/FilterHeroes';
 import { OpenHeroDetail } from '@heroes/application/OpenHeroDetail';
@@ -24,10 +22,11 @@ import { SortHeroes } from '@heroes/application/SortHeroes';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
 import { chartsThreshold } from '@heroes/domain/ChartsThreshold';
 import { ChipsService } from '@heroes/domain/ChipsService';
-import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { TableService } from '@heroes/domain/TableService';
+// eslint-disable-next-line max-len
+import { AngularMaterialHeroCreationDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroCreationDialogService';
 // eslint-disable-next-line max-len
 import { AngularMaterialHeroDetailDialogService } from '@heroes/infrastructure/services/AngularMaterialHeroDetailDialogService';
 import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
@@ -82,7 +81,6 @@ export class AppComponent implements OnInit {
 		private tableService: TableService,
 		private chipsService: ChipsService,
 		private chartsDataService: ChartsDataService,
-		private domainHeroService: DomainHeroService,
 		private heroCreationDialogService: HeroCreationDialogService,
 		private heroDetailDialogService: HeroDetailDialogService,
 	) {}
@@ -93,11 +91,7 @@ export class AppComponent implements OnInit {
 		new SetTableChartsData(this.stateService, this.chartsDataService).run(
 			heroes,
 		);
-		new SetChipsOptions(
-			this.chipsService,
-			this.domainHeroService,
-			this.stateService,
-		).run(heroes);
+		new SetChipsOptions(this.chipsService, this.stateService).run(heroes);
 	}
 	public onCreateHero(): void {
 		new OpenHeroCreation(

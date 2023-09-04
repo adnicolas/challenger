@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DomainHeroService } from '@heroes/domain/DomainHeroService';
 import { HeroesStateService } from '@heroes/domain/HeroesStateService';
 import { MarvelHero } from '@heroes/domain/MarvelHero.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -11,8 +10,6 @@ export class RxJsHeroesStateService implements HeroesStateService {
 	public filteredHeroes$: Observable<MarvelHero[]> =
 		this.filteredHeroesSrc.asObservable();
 
-	constructor(private domainHeroService: DomainHeroService) {}
-
 	public setHeroes(heroes: MarvelHero[]): void {
 		this.heroes = heroes;
 		this.filteredHeroesSrc.next(heroes);
@@ -20,8 +17,7 @@ export class RxJsHeroesStateService implements HeroesStateService {
 
 	public filterHeroes(heroesNames: string[]): void {
 		const filteredHeroes: MarvelHero[] = this.heroes.filter(
-			(hero: MarvelHero) =>
-				heroesNames.includes(this.domainHeroService.getHeroName(hero)),
+			(hero: MarvelHero) => heroesNames.includes(hero.nameLabel),
 		);
 		this.filteredHeroesSrc.next(filteredHeroes);
 	}
