@@ -38,11 +38,6 @@ be on the table after refresh)
 * Was the candidate able to use the components of a ui lib to create the app?
 * Was the candidate able to use D3 to create the charts?
 
-## Posibles mejoras
-
-* [ ] Añadir algún test unitario con Jest
-* [ ] Añadir algún test unitario con Cypress
-
 ## A tener en cuenta
 
 * No es arquitectura hexagonal (ports & adapters) pura ya que los contratos de los servicios en la capa dominio tienen RxJs por dependencia (Observables). It should be possible to use JS promises instead of RxJs observables, but we would have to write a lot of boilerplate code in our classes.
