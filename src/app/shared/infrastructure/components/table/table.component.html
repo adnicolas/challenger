@@ -4,6 +4,7 @@
 	matSort
 	(matSortChange)="sortData($event)"
 	*ngIf="displayedColumns$ | async as displayedColumns"
+	aria-label="Table component"
 >
 	<ng-container
 		*ngFor="let displayedColumn of displayedColumns; let colIndex = index"
