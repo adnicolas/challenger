@@ -7,8 +7,10 @@ describe('Challenger tests', () => {
 		cy.contains('button', 'Create hero');
 	});
 	it('Opens HeroCreationDialog when click on the button', () => {
-		cy.contains('button', 'Create hero').click(); // Click on first el containing 'Welcome'
-		cy.get('div').should('have.class', 'hero-creation-dialog-main-container');
+		cy.contains('button', 'Create hero')
+			.click()
+			.get('div')
+			.should('have.class', 'hero-creation-dialog-main-container');
 		cy.contains('button', 'Save');
 		cy.contains('button', 'Close');
 	});
@@ -16,8 +18,10 @@ describe('Challenger tests', () => {
 		cy.contains('td', 'Ahab');
 	});
 	it('Opens HeroDetailDialog when click on the row', () => {
-		cy.contains('td', 'Ahab').click();
-		cy.get('div').should('have.class', 'hero-detail-dialog-main-container');
+		cy.contains('td', 'Ahab')
+			.click()
+			.get('div')
+			.should('have.class', 'hero-detail-dialog-main-container');
 		cy.contains('button', 'Close');
 		cy.contains('div', 'Ahab');
 	});
