@@ -14,6 +14,7 @@
 	<challenger-table
 		[data$]="filteredHeroes$"
 		[chartsData$]="chartsData$"
+		[chartsThreshold]="CHARTS_THRESHOLD"
 		[displayedColumns$]="tableColumnsNames$"
 		(sorted)="onSortHeroes($event)"
 		(rowSelected)="onSelectHero($event)"

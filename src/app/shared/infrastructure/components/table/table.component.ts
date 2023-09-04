@@ -12,10 +12,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { Observable, of } from 'rxjs';
 import { SortOptions } from '@shared/domain/SortOptions.interface';
-import { PieChartComponent } from '../pie-chart/pie-chart.component';
+import { PieChartComponent } from '@shared/infrastructure/components/pie-chart/pie-chart.component';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { FormatColumnName } from '@shared/infrastructure/pipes/formatColumnName.pipe';
-import { BarChartComponent } from '../bar-chart/bar-chart.component';
+import { BarChartComponent } from '@shared/infrastructure/components/bar-chart/bar-chart.component';
 import { ChartData } from '@shared/domain/ChartData.interface';
 
 @Component({
@@ -42,6 +42,7 @@ export class TableComponent implements AfterViewInit {
 	}
 	@Input() displayedColumns$: Observable<string[]> = of([]);
 	@Input() chartsData$: Observable<ChartData[]> = of([]);
+	@Input() chartsThreshold!: number;
 	@Input() hidePaginator: boolean = false;
 	@Output() sorted: EventEmitter<SortOptions> = new EventEmitter<SortOptions>();
 	@Output() rowSelected: EventEmitter<unknown> = new EventEmitter<unknown>();

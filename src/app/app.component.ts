@@ -35,6 +35,7 @@ import { SetTableChartsData } from '@heroes/application/SetTableChartsData';
 import { ChartsDataService } from '@heroes/domain/ChartsDataService';
 import { RxJsChartsDataService } from '@heroes/infrastructure/services/RxJsChartsDataService';
 import { ChartData } from '@shared/domain/ChartData.interface';
+import { chartsThreshold } from '@heroes/domain/ChartsThreshold';
 
 @Component({
 	selector: 'challenger-root',
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit {
 	public chipOptions$: Observable<string[]> = this.chipsService.options$;
 	public chartsData$: Observable<ChartData | null> =
 		this.chartsDataService.chartsData$;
+	public CHARTS_THRESHOLD = chartsThreshold;
 	// eslint-disable-next-line max-params
 	constructor(
 		private dataService: HeroesDataService,
